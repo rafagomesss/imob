@@ -1,6 +1,7 @@
 $(document).ready(() => {
     $('#btnAccessSystem').on('click', () => {
         const data = $('#formLogin').serializeArray();
+        triggerAlert();
         $.ajax({
             url: '/Auth/authenticate',
             type: 'POST',
