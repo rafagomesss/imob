@@ -7,7 +7,7 @@
 
 <h3>Criar virtual host</h3>
 
-<p>Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf</p>
+**<p>Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf</p>**
 
 <p>Adicionar ao conteúdo do arquivo:<p>
 
@@ -24,7 +24,7 @@
 </VirtualHost>
 ```
 
-<p>Acessar C:/Windows/System32/drivers/etc/hosts</p>
+**<p>Acessar C:/Windows/System32/drivers/etc/hosts</p>**
 
 <p>Adicionar ao conteúdo do arquivo:</p>
 127.0.0.1 www.imob.com.br
