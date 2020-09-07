@@ -5,7 +5,7 @@ use System\Request;
 use System\Router;
 
 try {
-    Router::run(new Request());
+    (new Router())->run(new Request());
 } catch (\Exception $ex) {
     die('Exception: ' . $ex->getMessage());
 } catch (\Throwable $th) {

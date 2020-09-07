@@ -12,9 +12,10 @@ class Request
 
     public function __construct()
     {
-        $this->setController(!empty($this->getUri()[0]) ? $this->getUri()[0] : 'home')
-            ->setMethod(!empty($this->getUri()[1]) ? $this->getUri()[1] : 'main')
-            ->setParam(!empty($this->getUri()[2]) ? $this->getUri()[2] : []);
+        $uri = $this->getUri();
+        $this->setController(!empty($uri[0]) ? $uri[0] : 'home')
+            ->setMethod(!empty($uri[1]) ? $uri[1] : 'main')
+            ->setParam(!empty($uri[2]) ? $uri[2] : []);
     }
 
     private function getUri(): array

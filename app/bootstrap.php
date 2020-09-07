@@ -8,5 +8,5 @@ define('CSS_PATH', ASSETS_PATH . '/css');
 define('JS_PATH', ASSETS_PATH . '/js');
 define('IMG_PATH', ASSETS_PATH . '/img');
 define('VIEWS_PATH', DIR_ROOT . '/views');
-define('VIEWS_INCLUDES_PATH', DIR_ROOT . '/views/includes');
+define('VIEWS_INCLUDES_PATH', DIR_ROOT . '/views/includes' . DIRECTORY_SEPARATOR);
 define('VIEWS_SITE_PATH', DIR_ROOT . '/views/site');
