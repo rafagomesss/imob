@@ -5,7 +5,8 @@
 
 ### 1. Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf
 **Adicionar ao conteúdo do arquivo:**
-><VirtualHost *:80>
+```
+<VirtualHost *:80>
     ServerName www.imob.com.br
     ServerAlias imob.com.br
     DocumentRoot "C:/imob/app/public"
@@ -14,8 +15,8 @@
         AllowOverride All
         Require all granted
     </Directory>
-></VirtualHost>
-
+</VirtualHost>
+```
 ### Acessar C:/Windows/System32/drivers/etc/hosts
 **Adicionar ao conteúdo do arquivo:**
-    127.0.0.1 www.imob.com.br
+- 127.0.0.1 www.imob.com.br
