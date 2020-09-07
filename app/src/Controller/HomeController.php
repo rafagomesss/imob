@@ -11,6 +11,7 @@ class HomeController
     public function main()
     {
         $view = new View('authentication/login');
+        $view->controller = 'home';
         return $view->render();
     }
 }

@@ -4,45 +4,55 @@ declare(strict_types=1);
 
 namespace System;
 
-class Router
+class Router extends Request
 {
-    private $controller;
-    private $method;
-    private $param = [];
 
-    public function run(Request $request)
+    public function __construct()
     {
-        $this->controller = $request->getController();
-        $this->method = $request->getMethod();
-        $this->param = $request->getParam();
-        $this->validateRoute();
+        parent::__construct();
     }
 
-    private function validateRoute()
+    private function checkControllerExists(): bool
     {
-        if (!$this->classExistsRouter() || !$this->methodExistsRouter()) {
+        $this->setController(['Imob\Controller\\' . ucfirst($this->getController()) . 'Controller']);
+        return class_exists($this->getController());
+    }
+
+    private function checkMethodExists()
+    {
+        return method_exists($this->getController(), $this->getAction());
+    }
+
+    public function run()
+    {
+        if (!$this->checkControllerExists() || !$this->checkMethodExists()) {
             self::notFound();
         }
 
-        $response = call_user_func_array(
+        /**
+         * ? POR ALGUM MOTIVO O PHP NÃO DEIXA
+         * ? INSERIR O MÉTODO DIRETAMENTE PARA CHAMAR O NEW
+         * ? EX: new $this->getController()
+         */
+        $controller = $this->getController();
+
+        print call_user_func_array(
             [
-                new $this->controller,
-                $this->method
+                new $controller(),
+                $this->getAction()
             ],
-            [$this->param]
+            $this->getArgs()
         );
-
-        print $response;
     }
 
-    private function classExistsRouter()
+    public function setRequest(Request $request): void
     {
-        return class_exists($this->controller = "Imob\Controller\\" . ucfirst($this->controller) . 'Controller');
+        $this->request = $request;
     }
 
-    private function methodExistsRouter()
+    public function getRequest(): Request
     {
-        return method_exists($this->controller, $this->method);
+        return $this->request;
     }
 
     public static function notFound()

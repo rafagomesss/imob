@@ -6,23 +6,34 @@ namespace System;
 
 class Request
 {
-    private $controller;
-    private $method;
-    private $param = [];
+    private string $controller;
+    private string $action;
+    private array $args = [];
 
     public function __construct()
     {
-        $uri = $this->getUri();
-        $this->setController(!empty($uri[0]) ? $uri[0] : 'home')
-            ->setMethod(!empty($uri[1]) ? $uri[1] : 'main')
-            ->setParam(!empty($uri[2]) ? $uri[2] : []);
+        $this->defineRequest();
     }
 
-    private function getUri(): array
+    private function defineRequest()
     {
-        $uri = parse_url(substr($_SERVER['REQUEST_URI'], 1), PHP_URL_PATH);
-        $uri = explode('/', $uri);
-        return $uri ?? [];
+        $request = $this->getRequestUri();
+        $this->setController($request);
+        $this->setAction($request);
+        $this->setArgs($this->constructArgs($request) ?? []);
+    }
+
+    private function getRequestUri(): array
+    {
+        return explode('/', parse_url(substr($_SERVER['REQUEST_URI'], 1), PHP_URL_PATH));
+    }
+
+    private function constructArgs(array $request): array
+    {
+        if (count($request) >= 3) {
+            return array_slice($request, 2);
+        }
+        return $request[2] ?? [];
     }
 
     public function getController(): string
@@ -30,33 +41,33 @@ class Request
         return $this->controller;
     }
 
-    public function setController($controller): Request
+    public function setController(array $request): Request
     {
-        $this->controller = $controller;
+        $this->controller = !empty($request[0]) ? $request[0] : 'home';
 
         return $this;
     }
 
-    public function getMethod(): string
+    public function getAction(): string
     {
-        return $this->method;
+        return $this->action;
     }
 
-    public function setMethod($method): Request
+    public function setAction(array $request): Request
     {
-        $this->method = $method;
+        $this->action = !empty($request[1]) ? $request[1] : 'main';
 
         return $this;
     }
 
-    public function getParam()
+    public function getArgs(): array
     {
-        return $this->param;
+        return $this->args;
     }
 
-    public function setParam($param): Request
+    public function setArgs($args): Request
     {
-        $this->param = $param;
+        $this->args = $args;
 
         return $this;
     }

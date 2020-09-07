@@ -18,14 +18,14 @@ class View
         $this->menu = $menu;
     }
 
-    public function __set($index, $value)
+    public function __set($index, $value): void
     {
         $this->{$index} = $value;
     }
 
-    public function __get($index)
+    public function __get($index): ?string
     {
-        return $this->{$index};
+        return $this->{$index} ?? null;
     }
 
     public function render()
