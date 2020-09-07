@@ -28,11 +28,16 @@ class ComposerStaticInit62c704c704be2c79756957a044ed0967
         ),
     );
 
+    public static $classMap = array (
+        'System\\Request' => __DIR__ . '/..' . '/System/Request.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit62c704c704be2c79756957a044ed0967::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit62c704c704be2c79756957a044ed0967::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit62c704c704be2c79756957a044ed0967::$classMap;
 
         }, null, ClassLoader::class);
     }
