@@ -1,8 +1,8 @@
 # imob
 ## Desenvolvido com o serviço Xampp
 
-**1. Criar virtual host**
-    - Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf
+## Criar virtual host
+    **1. Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf**
     *Adicionar ao conteúdo do arquivo:*
         > <VirtualHost *:80>
             ServerName www.imob.com.br
