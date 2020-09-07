@@ -10,6 +10,7 @@
 <p>Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf</p>
 
 <p>Adicionar ao conteúdo do arquivo:<p>
+
 ```
 <VirtualHost *:80>
     ServerName www.imob.com.br
