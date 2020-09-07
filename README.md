@@ -1,9 +1,9 @@
-# imob
+<h1 align="center"> imob </h1>
 ## Desenvolvido com o serviço Xampp
 
 ## Criar virtual host
 
-### 1. Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf
+### Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf
 **Adicionar ao conteúdo do arquivo:**
 ```
 <VirtualHost *:80>
