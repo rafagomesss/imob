@@ -23,14 +23,12 @@ class Auth
             $stmt->bindValue(':login', $login);
             $stmt->bindValue(':password', $senha);
             $stmt->execute();
-            $retorno = ['message' => 'Usuário e/ou senha inválido(s)!'];
+            $retorno = ['error' => true, 'message' => 'Usuário e/ou senha inválido(s)!'];
             if ($stmt->rowCount() > 0) {
                 $retorno = ['message' => 'Usuário encontrado!'];
             }
-        } catch (\Throwable $t) {
-            $retorno = ['code' => $t->getCode(), 'message' => $t->getMessage()];
-        } catch (\Exception $e) {
-            $retorno = ['code' => $e->getCode(), 'message' => $e->getMessage()];
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
         }
         $response->getBody()->write(json_encode($retorno));
         return $response;

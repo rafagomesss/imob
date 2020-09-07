@@ -13,7 +13,7 @@ try {
 
     $app->run();
 } catch (\Throwable $t) {
-    echo json_encode(['code' => $t->getCode(), 'message' => $t->getMessage()]);
+    echo json_encode(['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()]);
 } catch (\Exception $e) {
-    echo json_encode(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+    echo json_encode(['error' => true, 'code' => $e->getCode(), 'message' => $e->getMessage(), 'line' => $e->getLine(), 'file' => $e->getFile()]);
 }
