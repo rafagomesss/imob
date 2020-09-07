@@ -1,9 +1,12 @@
 <h1 align="center"> imob </h1>
-## Desenvolvido com o serviço Xampp
+## Descrição do Projeto
+<p align="center">CRUD</p>
+<p align="center">Desenvolvido com o serviço Xampp</p>
 
-## Criar virtual host
+<h2 align="center"> Passos </h2>
+1. Criar virtual host
 
-### Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf
+<p align="center">Acessar C:/xampp/apache/conf/extra/httpd-vhosts.conf</p>
 **Adicionar ao conteúdo do arquivo:**
 ```
 <VirtualHost *:80>
@@ -17,6 +20,6 @@
     </Directory>
 </VirtualHost>
 ```
-### Acessar C:/Windows/System32/drivers/etc/hosts
+<p align="center">Acessar C:/Windows/System32/drivers/etc/hosts</p>
 **Adicionar ao conteúdo do arquivo:**
-- 127.0.0.1 www.imob.com.br
+127.0.0.1 www.imob.com.br
