@@ -23,6 +23,7 @@ class Router
         if (!$this->classExistsRouter() || !$this->methodExistsRouter()) {
             self::notFound();
         }
+
         $response = call_user_func_array(
             [
                 new $this->controller,
@@ -30,6 +31,7 @@ class Router
             ],
             [$this->param]
         );
+
         print $response;
     }
 
@@ -45,7 +47,7 @@ class Router
 
     public static function notFound()
     {
-        print (new \Imob\View\View('/404', true))->render();
+        print (new \Imob\View\View('404'))->render();
         exit();
     }
 }

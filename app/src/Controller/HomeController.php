@@ -10,6 +10,7 @@ class HomeController
 {
     public function main()
     {
-        print (new View('teste'))->render();
+        $view = new View('authentication/login');
+        return $view->render();
     }
 }

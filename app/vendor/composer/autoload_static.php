@@ -29,7 +29,10 @@ class ComposerStaticInit62c704c704be2c79756957a044ed0967
     );
 
     public static $classMap = array (
+        'Imob\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/Controller/HomeController.php',
+        'Imob\\View\\View' => __DIR__ . '/../..' . '/src/View/View.php',
         'System\\Request' => __DIR__ . '/..' . '/System/Request.php',
+        'System\\Router' => __DIR__ . '/..' . '/System/Router.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
