@@ -16,6 +16,15 @@
                 </li>
             <?php endif; ?>
         </ul>
-        <span class="text-info mr-3 text-uppercase font-weight-bold">Olá <?= \System\Session::get('USER'); ?></span>
+        <?php if (\System\Session::has('USER')) : ?>
+            <div class="row">
+                <div class="col-auto">
+                    <span class="text-info mr-3 text-uppercase font-weight-bold">Olá <?= \System\Session::get('USER'); ?></span>
+                </div>
+                <div class="col-md-2 col-xl-2">
+                    <a href="/auth/logout" class="btn btn-danger btn-sm">Sair</a>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </nav>

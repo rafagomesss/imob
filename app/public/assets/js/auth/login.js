@@ -11,7 +11,7 @@ $(document).ready(() => {
                 triggerAlert(response.message, 'warning', 'OK');
                 return false;
             }
-            triggerAlert('Usuário logado com sucesso!', 'success', 'OK');
+            window.location.href = '/sales';
             return true;
         }).fail(function (response) {
             console.log(response)

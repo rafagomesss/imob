@@ -1,21 +1,32 @@
-<?php if (Imob\System\Session::has('success')) : ?>
-    <div class="alert alert-success" role="alert">
-        <?=(Imob\System\Session::get('msg');?>
+<?php if (System\Session::has('success')) : ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <?= System\Session::get('success'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 <?php endif; ?>
-<?php if (Imob\System\Session::has('warning')) : ?>
-    <div class="alert alert-warning" role="alert">
-        <?=(Imob\System\Session::get('msg');?>
+<?php if (System\Session::has('warning')) : ?>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <?= System\Session::get('warning'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 <?php endif; ?>
-<?php if (Imob\System\Session::has('info')) : ?>
-    <div class="alert alert-info" role="alert">
-        <?=(Imob\System\Session::get('msg');?>
+<?php if (System\Session::has('info')) : ?>
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <?= System\Session::get('info'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 <?php endif; ?>
-<?php if (Imob\System\Session::has('danger')) : ?>
-    <div class="alert alert-danger" role="alert">
-        <?=(Imob\System\Session::get('msg');?>
+<?php if (System\Session::has('danger')) : ?>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <?= System\Session::get('danger'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 <?php endif; ?>
-

@@ -16,4 +16,7 @@
         require VIEWS_INCLUDES_PATH . 'menu.view.php';
     }
     ?>
+    <div class="col-md-12 col-xl-12">
+        <?php require VIEWS_INCLUDES_PATH . 'messages.view.php'; ?>
+    </div>
     <div class="container">

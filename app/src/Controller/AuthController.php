@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Imob\Controller;
 
 use Imob\View\View;
+use System\Flash;
 use System\PasswordManager;
 use System\RequestAPI;
 use System\Session;
@@ -28,7 +29,7 @@ class AuthController extends Controller
         Session::sessionStart();
         Session::set('USER', $userData['login']);
         Session::set('ACCESS_LEVEL', $userData['access_level_id']);
-        // Session::set('success');
+        Flash::set('success', 'Usuário logado com sucesso!');
     }
 
     public function authenticate(): void
@@ -59,5 +60,13 @@ class AuthController extends Controller
         $userData = $this->validarDadosPost();
         $retorno = (new RequestAPI)->sendRequest(URL_API . '/register', $userData);
         echo json_encode($retorno);
+    }
+
+    public function logout()
+    {
+        Session::destroySession();
+        Session::sessionStart();
+        Flash::set('info', 'Usuário deslogado!');
+        header('Location: /');
     }
 }
