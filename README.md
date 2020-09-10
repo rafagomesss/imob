@@ -8,6 +8,8 @@
 <h2> Etapas </h2>
 <h3>0. Rodar todos os scripts de DB</h3>
 
+**<small>Arquivo C:\imob\SQL.sql</small>**
+
 <h3>1. Clonar Arquivo em C:/ para que fique C:/imob</h3>
 
 <h3>2. Criar virtual host</h3>
