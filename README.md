@@ -39,4 +39,4 @@
 **_Caso não esteja achando as classes, entre na pasta app e pelo cmd/bash execute o comando composer-dump autoload - o_**
 
 <h2>Para Levantar API</h2>
-<p>Ir ao diretório: C:\imob\api\public e rodar o built-in server php <i>php -S localhost:4040</i></p>
+<p>Ir ao diretório: C:\imob\api\public e rodar o built-in server php: <b><i>php -S localhost:4040</i></p></b>
