@@ -6,12 +6,12 @@ namespace Imob\Controller;
 
 use Imob\View\View;
 
-class HomeController
+class SalesController
 {
     public function main()
     {
-        $view = new View('authentication/login', true);
-        $view->controller = 'home';
+        $view = new View('sales/sales', true);
+        $view->controller = 'sales';
         return $view->render();
     }
 }

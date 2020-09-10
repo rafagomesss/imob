@@ -9,6 +9,7 @@ try {
     $app = AppFactory::create();
 
     $app->post('/authenticate', 'Api\Controller\Auth:userLogin');
+    $app->post('/register', 'Api\Controller\Auth:userRegister');
 
 
     $app->run();

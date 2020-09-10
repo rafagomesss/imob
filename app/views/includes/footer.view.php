@@ -7,6 +7,9 @@
 	<?php if ($this->controller === 'home') : ?>
 		<script src="<?= JS_PATH; ?>/auth/login.js" type="text/javascript"></script>
 	<?php endif; ?>
+	<?php if ($this->controller === 'auth') : ?>
+		<script src="<?= JS_PATH; ?>/auth/register.js" type="text/javascript"></script>
+	<?php endif; ?>
 	</body>
 
 	</html>

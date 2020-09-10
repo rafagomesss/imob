@@ -4,11 +4,13 @@ require dirname($_SERVER['DOCUMENT_ROOT']) . DIRECTORY_SEPARATOR . "config" . DI
 
 use System\Request;
 use System\Router;
+use System\Session;
 
 try {
+    Session::sessionStart();
     (new Router())->run(new Request());
 } catch (\Exception $ex) {
-    die('Exception: ' . $ex->getMessage());
+    die('Exception: ' . $ex->getMessage() . ' - ' . $ex->getFile() . ' - ' . $ex->getLine());
 } catch (\Throwable $th) {
-    die('Throwable: ' . $th->getMessage());
+    die('Throwable: ' . $th->getMessage() . ' - ' . $th->getFile() . ' - ' . $th->getLine());
 }

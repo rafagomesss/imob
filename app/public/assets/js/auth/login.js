@@ -7,15 +7,15 @@ $(document).ready(() => {
             dataType: 'JSON',
             data: data,
         }).done(function (response) {
-            console.log(response);
             if (response.error) {
-                triggerAlert('ATENÇÃO!', response.message, 'warning', 'OK');
+                triggerAlert(response.message, 'warning', 'OK');
                 return false;
             }
-            // triggerAlert(response.message);
+            triggerAlert('Usuário logado com sucesso!', 'success', 'OK');
+            return true;
         }).fail(function (response) {
-            console.log(response.responseText);
-            triggerAlert('ERRO!', response.responseText, 'error', 'OK');
+            console.log(response)
+            triggerAlert(response.responseText, 'error', 'OK');
             return false;
         }).always(function () {
 

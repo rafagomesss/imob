@@ -2,6 +2,7 @@
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 define('DIR_ROOT', dirname($_SERVER['DOCUMENT_ROOT']));
+define('SITE_URL', 'http://www.imob.com.br');
 
 define('ASSETS_PATH', '/assets');
 define('CSS_PATH', ASSETS_PATH . '/css');

@@ -11,5 +11,6 @@
             </div>
             <button id="btnAccessSystem" type="button" class="btn btn-primary">Entrar</button>
         </form>
+        Não tem uma conta? <a href="/auth/register">Cadastre-se aqui!</a>
     </div>
 </div>

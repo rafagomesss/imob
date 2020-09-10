@@ -11,5 +11,9 @@
 </head>
 
 <body>
-
+    <?php
+    if ($this->menu) {
+        require VIEWS_INCLUDES_PATH . 'menu.view.php';
+    }
+    ?>
     <div class="container">
