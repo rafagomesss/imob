@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMOB</title>
     <link rel="stylesheet" type="text/css" href="<?= ASSETS_PATH; ?>/css/bootstrap/bootstrap.min.css">
+    <?php if ($this->controller === '404') : ?>
+        <link rel="stylesheet" type="text/css" href="<?= ASSETS_PATH; ?>/css/custom/404.css">
+    <?php endif; ?>
     <link rel="icon" href="<?= ASSETS_PATH; ?>/img/favicon.ico">
 </head>
 

@@ -57,7 +57,9 @@ class Router extends Request
 
     public static function notFound()
     {
-        print (new \Imob\View\View('404'))->render();
+        $view = (new \Imob\View\View('404'));
+        $view->controller = '404';
+        print $view->render();
         exit();
     }
 }
