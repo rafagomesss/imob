@@ -15,6 +15,17 @@
                     <a class="nav-link" href="<?= SITE_URL; ?>/sales">Vendas</a>
                 </li>
             <?php endif; ?>
+            <?php if (\System\Session::has('USER') && (int) \System\Session::get('ACCESS_LEVEL') === 1) : ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produtos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= SITE_URL; ?>/products/list">Listar</a>
+                        <a class="dropdown-item" href="<?= SITE_URL; ?>/products/register">Cadastrar</a>
+                    </div>
+                </li>
+            <?php endif; ?>
         </ul>
         <?php if (\System\Session::has('USER')) : ?>
             <div class="row">

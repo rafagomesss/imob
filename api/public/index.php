@@ -11,6 +11,7 @@ try {
     $app->post('/authenticate', 'Api\Controller\Auth:userLogin');
     $app->post('/register', 'Api\Controller\Auth:userRegister');
 
+    $app->post('/product/register', 'Api\Controller\Product:productRegister');
 
     $app->run();
 } catch (\Throwable $t) {

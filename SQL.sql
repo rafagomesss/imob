@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS user_access
 	ON DELETE NO ACTION
 	ON UPDATE NO ACTION
 ) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
+# TRUNCATE TABLE user_access;
 # SELECT * FROM user_access;
 
 # INSERT INTO user_access (login, password, access_level_id) VALUES('gomes', '12345', 1);
