@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,12 +28,14 @@
             <?php endif; ?>
         </ul>
         <?php if (\System\Session::has('USER')) : ?>
-            <div class="row">
-                <div class="col-auto">
-                    <span class="text-info mr-3 text-uppercase font-weight-bold">Olá <?= \System\Session::get('USER'); ?></span>
+            <div class="row justify-content-center mr-3 mb-2">
+                <div class="col ml-2 bg-info rounded mr-4 py-1">
+                    <span class="text-white text-uppercase font-weight-bold mx-auto">Olá <?= \System\Session::get('USER'); ?></span>
                 </div>
-                <div class="col-md-2 col-xl-2">
-                    <a href="<?= SITE_URL; ?>/auth/logout" class="btn btn-danger btn-sm">Sair</a>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col ml-2 rounded mr-4 py-1 mb-2 px-0">
+                    <a href="<?= SITE_URL; ?>/auth/logout" class="btn btn-danger btn-sm px-4">Sair</a>
                 </div>
             </div>
         <?php elseif (
