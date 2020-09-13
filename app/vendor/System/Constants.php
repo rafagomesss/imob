@@ -9,18 +9,14 @@ class Constants
     const RESTRICT_USER_ROUTE = [
         'USER' => [
             'controller' => [
-                'user' => [
+                'products' => [
                     'action' => [
-                        'edit',
-                        'register',
-                        'list'
+                        'list',
                     ],
                 ],
-                'category' => [
+                'sales' => [
                     'action' => [
-                        'edit',
-                        'register',
-                        'list'
+                        'list',
                     ],
                 ],
             ],

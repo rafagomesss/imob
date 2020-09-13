@@ -1,7 +1,7 @@
 <form id="frmRegister" method="POST">
     <div class="row justify-content-start mb-4">
         <div class="col-md-auto">
-            <a class="btn btn-sm btn-info" href="<?= SITE_URL; ?>">Voltar</a>
+            <a class="btn btn-sm btn-info" href="<?= SITE_URL; ?>/auth/login">Voltar</a>
         </div>
     </div>
     <div class="row justify-content-center mb-4">

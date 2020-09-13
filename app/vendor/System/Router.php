@@ -32,7 +32,7 @@ class Router extends Request
 
     private function controlNotSessionRouteAccess()
     {
-        if (Session::has('USER') && in_array($this->getController(), array_keys(Constants::ONLY_NOT_SESSION)) && !in_array($this->action, Constants::ONLY_NOT_SESSION[$this->getController()]['exceptionActions'])) {
+        if (Session::has('USER') && in_array($this->getController(), array_keys(Constants::ONLY_NOT_SESSION)) && !in_array($this->getAction(), Constants::ONLY_NOT_SESSION[$this->getController()]['exceptionActions'])) {
             Common::redirect('/');
         }
         $this->validateRoute();

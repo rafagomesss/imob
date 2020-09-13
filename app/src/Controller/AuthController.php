@@ -11,7 +11,7 @@ use System\PasswordManager;
 use System\RequestAPI;
 use System\Session;
 
-class AuthController extends Controller
+class AuthController
 {
     public function __construct()
     {
