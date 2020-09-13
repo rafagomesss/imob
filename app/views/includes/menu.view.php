@@ -33,7 +33,17 @@
                     <span class="text-info mr-3 text-uppercase font-weight-bold">Olá <?= \System\Session::get('USER'); ?></span>
                 </div>
                 <div class="col-md-2 col-xl-2">
-                    <a href="/auth/logout" class="btn btn-danger btn-sm">Sair</a>
+                    <a href="<?= SITE_URL; ?>/auth/logout" class="btn btn-danger btn-sm">Sair</a>
+                </div>
+            </div>
+        <?php elseif (
+            !\System\Session::has('USER') &&
+            (!empty($this->controller) &&
+                $this->controller !== 'auth')
+        ) : ?>
+            <div class="row">
+                <div class="col-md-2 col-xl-2 mr-4">
+                    <a href="<?= SITE_URL; ?>/auth/login" class="btn btn-primary btn-sm px-4">Login</a>
                 </div>
             </div>
         <?php endif; ?>

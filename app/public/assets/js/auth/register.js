@@ -38,7 +38,7 @@ function handleDoneAlerts(response) {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.showLoading();
-                window.location.href = '/home';
+                window.location.href = '/auth/login';
             }
         });
         return true;

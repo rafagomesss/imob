@@ -50,6 +50,14 @@ class AuthController extends Controller
         Flash::set('success', 'Usuário logado com sucesso!');
     }
 
+    public function login()
+    {
+        $view = new View('authentication/login', true);
+        $view->controller = 'auth';
+        $view->action = 'login';
+        return $view->render();
+    }
+
     public function authenticate(): void
     {
         $userData = filter_input_array(INPUT_POST);
@@ -70,6 +78,7 @@ class AuthController extends Controller
     {
         $view = new View('authentication/register', true);
         $view->controller = 'auth';
+        $view->action = 'register';
         return $view->render();
     }
 

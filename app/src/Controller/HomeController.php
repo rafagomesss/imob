@@ -12,7 +12,7 @@ class HomeController
 {
     public function main()
     {
-        $view = new View('authentication/login', true);
+        $view = new View('index', true);
         $view->controller = 'home';
         return $view->render();
     }

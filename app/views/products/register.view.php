@@ -1,9 +1,44 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-center mt-3 mb-4">
             <div class="col-md-auto">
                 <h2>Cadastrar Produto</h2>
             </div>
         </div>
+        <form method="POST">
+            <div class="row justify-content-center mb-2">
+                <div class="col-md-3">
+                    <label for="productCode">Código Produto</label>
+                    <input type="text" class="form-control" name="productCode" id="productCode" aria-describedby="productCodeHelp" placeholder="XXXX XXXX" />
+                    <small id="productCodeHelp" class="form-text text-muted">Código de cadastro do produto</small>
+                </div>
+                <div class="col-md-9">
+                    <label for="productName">Nome do Produto</label>
+                    <input type="text" class="form-control" name="productName" id="productName" aria-describedby="productNameHelp" placeholder="Ex: Laranja, Maça, Pêssego" />
+                    <small id="productNameHelp" class="form-text text-muted">Nome do Produto</small>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-2">
+                <div class="col-md-6">
+                    <label for="productPrice">Preço do Produto</label>
+                    <input type="text" class="form-control" name="productPrice" id="productPrice" />
+                </div>
+                <div class="col-md-6">
+                    <label for="productExpiration">Data de Validade</label>
+                    <input type="text" class="form-control" name="productExpiration" id="productExpiration" />
+                </div>
+            </div>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-12">
+                    <label for="productDescription">Descrição do produto</label>
+                    <textarea class="form-control" name="productDescription" id="productDescription" rows="4" placeholder="Informações pertinentes sobre o produto"></textarea>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-2">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-success btn-block"> Cadastrar</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
