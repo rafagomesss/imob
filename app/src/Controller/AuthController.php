@@ -61,7 +61,7 @@ class AuthController extends Controller
     public function authenticate(): void
     {
         $userData = filter_input_array(INPUT_POST);
-        $retorno = (new RequestAPI)->sendRequest(URL_API . '/authenticate', $userData);
+        $retorno = RequestAPI::sendRequest(URL_API . '/authenticate', $userData);
         if (empty($retorno['error']) && !empty($retorno['user'])) {
             $verify = PasswordManager::validatePassword($userData['pass'], $retorno['user']['password']);
             if ($verify) {
@@ -85,7 +85,7 @@ class AuthController extends Controller
     public function registerUser(): void
     {
         $userData = $this->dataPostValidate();
-        $retorno = (new RequestAPI)->sendRequest(URL_API . '/register', $userData);
+        $retorno = RequestAPI::sendRequest(URL_API . '/register', $userData);
         echo json_encode($retorno);
     }
 

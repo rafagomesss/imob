@@ -8,16 +8,18 @@ CREATE TABLE IF NOT EXISTS products (
   name VARCHAR(200) NOT NULL,
   description VARCHAR(200) NOT NULL,
   dateExpiration DATETIME,
+  dateRegister DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   price DECIMAL(10, 2),
   PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # DESC products;
 # SELECT * FROM products;
-
+# TRUNCATE products;
 # INSERT INTO products VALUES(0, 35687458, 'Laranja', 'Fruta Cítrica', DATE('2020-09-05 d-M-Y'), 2.98);
 # -- ERRO AO INSERIR-> INSERT INTO products VALUES(0, 35687458, 'Abacate', 'Fruta fonte de boa gordura', DATE('2020-09-05 d-M-Y'), 2.98); -- #
 # INSERT INTO products VALUES(0, NULL, 'Pêra', 'Fruta Macia', DATE('2020-09-05 d-M-Y'), 3.15);
 # INSERT INTO products VALUES(0, NULL, 'Maça', 'Fruta', DATE('2020-09-05 d-M-Y'), 8.50);
+# INSERT INTO products VALUES(0, NULL, 'Uva', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ornare sem arcu, non eleifend arcu hendrerit vel. Suspendisse in eros feugiat, aliquam purus nec, semper nibh. Sed fermentum elit lectus, in sodales nulla dignissim vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc gravida nisi non nisi interdum pulvinar. Nullam porttitor mi sem, a laoreet lectus rutrum vitae. Aliquam erat volutpat. Vestibulum tincidunt sed risus vitae fermentum. Nunc ut velit dui. Nunc lorem nibh, malesuada id risus aliquam, accumsan porttitor nisl. Aenean ex neque, ullamcorper non facilisis at, laoreet quis massa. In in vehicula erat. Donec molestie eros ac faucibus varius.', DATE('2020-09-05 d-M-Y'), 8.50);
 
 
 # DROP TABLE sales;

@@ -12,6 +12,10 @@ try {
     $app->post('/register', 'Api\Controller\Auth:userRegister');
 
     $app->post('/product/register', 'Api\Controller\Product:productRegister');
+    $app->get('/product/listAll', 'Api\Controller\Product:productGetAll');
+    $app->post('/product/delete', 'Api\Controller\Product:delete');
+    $app->post('/product/edit', 'Api\Controller\Product:edit');
+
 
     $app->run();
 } catch (\Throwable $t) {

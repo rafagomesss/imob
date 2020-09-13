@@ -36,4 +36,60 @@ class Product
         $response->getBody()->write(json_encode($retorno));
         return $response;
     }
+
+    public function productGetAll(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $stmt = $conn->query('SELECT * FROM products');
+            $retorno = ['error' => true, 'message' => 'Nenhum produto encontrado!'];
+            if ($stmt->rowCount() > 0) {
+                $retorno = $stmt->fetchAll();
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
+
+    public function delete(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $id = $request->getParsedBody()['id'];
+            $stmt = $conn->prepare('DELETE FROM products WHERE id = :id');
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $retorno = ['error' => true, 'message' => 'Produto não existe!'];
+            if ($stmt->rowCount() > 0) {
+                $retorno = ['message' => 'Produto excluído com sucesso!'];
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
+
+    public function edit(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $id = $request->getParsedBody()['id'];
+            $stmt = $conn->prepare('SELECT * FROM products WHERE id = :id');
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $retorno = ['error' => true, 'message' => 'Produto não encontrado!'];
+            if ($stmt->rowCount() > 0) {
+                $retorno = $stmt->fetch();
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        } catch (\Throwable $t) {
+            $retorno = ['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
 }

@@ -6,7 +6,7 @@ namespace System;
 
 class RequestAPI
 {
-    public function sendRequest(string $url, array $params = [])
+    public static function sendRequest(string $url, array $params = [])
     {
         $sendPost = (bool) count($params);
         $ch = curl_init();
