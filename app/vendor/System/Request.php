@@ -9,6 +9,7 @@ class Request
     private string $controller;
     private string $action;
     private array $args = [];
+    private string $pureController;
 
     public function __construct()
     {
@@ -44,6 +45,7 @@ class Request
     public function setController(array $request): Request
     {
         $this->controller = !empty($request[0]) ? $request[0] : 'home';
+        $this->setPureController($request);
 
         return $this;
     }
@@ -70,5 +72,17 @@ class Request
         $this->args = $args;
 
         return $this;
+    }
+
+    public function setPureController(array $request): Request
+    {
+        $this->pureController = !empty($request[0]) ? $request[0] : 'home';
+
+        return $this;
+    }
+
+    public function getPureController(): string
+    {
+        return $this->pureController;
     }
 }

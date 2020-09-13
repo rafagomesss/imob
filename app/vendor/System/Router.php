@@ -12,37 +12,56 @@ class Router extends Request
         parent::__construct();
     }
 
+    private function restrictRoute()
+    {
+        if (in_array($this->getController(), Constants::RULE_ROUTE_SESSION) && !Session::validateSessionUser()) {
+            self::notFound();
+        }
+        $this->controlRestrictedRoutes();
+    }
+
+    private function controlRestrictedRoutes()
+    {
+        if (Session::validateSessionUser() && isset(Constants::RESTRICT_USER_ROUTE[Session::get('ACCESS_LEVEL')])) {
+            if (in_array($this->getController(), array_keys(Constants::RESTRICT_USER_ROUTE[Session::get('ACCESS_LEVEL')]['controller'])) && in_array($this->action, Constants::RESTRICT_USER_ROUTE[Session::get('ACCESS_LEVEL')]['controller'][$this->getController()]['action'])) {
+                self::notFound();
+            }
+        }
+        $this->controlNotSessionRouteAccess();
+    }
+
+    private function controlNotSessionRouteAccess()
+    {
+        if (Session::has('USER') && in_array($this->getController(), array_keys(Constants::ONLY_NOT_SESSION)) && !in_array($this->action, Constants::ONLY_NOT_SESSION[$this->getController()]['exceptionActions'])) {
+            Common::redirect('/');
+        }
+        $this->validateRoute();
+    }
+
+    private function validateRoute()
+    {
+        if (!$this->checkControllerExists() || !$this->checkMethodExists()) {
+            self::notFound();
+        }
+        $controller = $this->getController();
+        $response = call_user_func_array([new $controller, $this->getAction()], [$this->getArgs()]);
+        print $response;
+    }
+
     private function checkControllerExists(): bool
     {
         $this->setController(['Imob\Controller\\' . ucfirst($this->getController()) . 'Controller']);
         return class_exists($this->getController());
     }
 
-    private function checkMethodExists()
+    private function checkMethodExists(): bool
     {
         return method_exists($this->getController(), $this->getAction());
     }
 
     public function run()
     {
-        if (!$this->checkControllerExists() || !$this->checkMethodExists()) {
-            self::notFound();
-        }
-
-        /**
-         * ? POR ALGUM MOTIVO O PHP NÃO DEIXA
-         * ? INSERIR O MÉTODO DIRETAMENTE PARA CHAMAR O NEW
-         * ? EX: new $this->getController()
-         */
-        $controller = $this->getController();
-
-        print call_user_func_array(
-            [
-                new $controller(),
-                $this->getAction()
-            ],
-            $this->getArgs()
-        );
+        $this->restrictRoute();
     }
 
     public function setRequest(Request $request): void

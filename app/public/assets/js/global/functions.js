@@ -20,3 +20,27 @@ function triggerAlert(msg = '', icon = 'success', confirmButtonText = 'OK', toas
         }
     });
 }
+
+function formFieldValidate(inputs) {
+    let validate = true;
+    $.each(inputs, function () {
+        removeBorderDanger(this);
+        if (this.value === '') {
+            addBorderDanger(this);
+            triggerAlert('Preencha os campos obrigatórios!', 'warning', 'OK', true);
+            validate = false;
+        }
+    });
+    return validate;
+}
+
+function addBorderDanger(field) {
+    $(field).addClass('border-danger');
+}
+
+function removeBorderDanger(field) {
+    const input = $(field);
+    if (input.hasClass('border-danger')) {
+        $(input).removeClass('border-danger');
+    }
+}

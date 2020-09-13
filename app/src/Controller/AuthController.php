@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Imob\Controller;
 
+use Exception;
 use Imob\View\View;
 use System\Flash;
 use System\PasswordManager;
@@ -16,9 +17,26 @@ class AuthController extends Controller
     {
     }
 
-    private function validarDadosPost(): array
+    private function verifyDataIsEmpty($data, bool $ajax = false): void
+    {
+        if (is_array($data) && count($data)) {
+            foreach ($data as $item) {
+                if (empty($item)) {
+                    echo json_encode([
+                        'error' => true,
+                        'message' => 'Preencha todos os campos para registrar usuário!',
+                        'class' => 'warning'
+                    ]);
+                    exit();
+                }
+            }
+        }
+    }
+
+    private function dataPostValidate(): array
     {
         $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $this->verifyDataIsEmpty($formData, true);
         $formData['password'] = PasswordManager::passwordHash($formData['password']);
         unset($formData['confirmPassword']);
         return $formData;
@@ -50,14 +68,14 @@ class AuthController extends Controller
 
     public function register()
     {
-        $view = new View('authentication/register');
+        $view = new View('authentication/register', true);
         $view->controller = 'auth';
         return $view->render();
     }
 
     public function registerUser(): void
     {
-        $userData = $this->validarDadosPost();
+        $userData = $this->dataPostValidate();
         $retorno = (new RequestAPI)->sendRequest(URL_API . '/register', $userData);
         echo json_encode($retorno);
     }
