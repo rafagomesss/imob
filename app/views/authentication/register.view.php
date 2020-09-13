@@ -1,4 +1,9 @@
 <form id="frmRegister" method="POST">
+    <div class="row justify-content-start mb-4">
+        <div class="col-md-auto">
+            <a class="btn btn-sm btn-info" href="<?= SITE_URL; ?>">Voltar</a>
+        </div>
+    </div>
     <div class="row justify-content-center mb-4">
         <div class="col-md-auto">
             <h2>Cadastro de Usuários</h2>
@@ -17,7 +22,7 @@
             <label for="password">Senha:</label>
         </div>
         <div class="col-md-10">
-            <input type="password" class="form-control" name="password" id="password" required maxlength="72" />
+            <input type="password" class="form-control" name="password" id="password" required maxlength="16" />
         </div>
     </div>
     <div class="row justify-content-center mb-4">
@@ -25,7 +30,7 @@
             <label for="passwordConfirmation">Confirme a senha:</label>
         </div>
         <div class="col-md-10">
-            <input type="password" class="form-control" name="passwordConfirmation" id="passwordConfirmation" required maxlength="72" />
+            <input type="password" class="form-control" name="passwordConfirmation" id="passwordConfirmation" required maxlength="16" />
         </div>
     </div>
     <div class="row">

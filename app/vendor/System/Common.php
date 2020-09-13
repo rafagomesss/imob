@@ -6,7 +6,7 @@ namespace System;
 
 class Common
 {
-    public static function redirect($route)
+    public static function redirect($route): void
     {
         header("Location: {$route}");
     }

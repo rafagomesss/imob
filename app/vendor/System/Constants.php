@@ -28,7 +28,8 @@ class Constants
     ];
 
     const RULE_ROUTE_SESSION = [
-        'sales'
+        'sales',
+        'products'
     ];
 
     const ACCESS_LEVEL = [
