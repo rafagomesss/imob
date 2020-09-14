@@ -10,8 +10,7 @@ class ModelProduct
 {
     public function registerProduct(array $param)
     {
-        $retorno = RequestAPI::sendRequest(URL_API . '/product/register', $param);
-        return $retorno;
+        return RequestAPI::sendRequest(URL_API . '/product/register', $param);
     }
 
     public function getAll(): array

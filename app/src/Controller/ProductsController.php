@@ -6,6 +6,7 @@ namespace Imob\Controller;
 
 use Imob\Model\ModelProduct;
 use Imob\View\View;
+use System\Common;
 use System\Flash;
 use System\RequestAPI;
 
@@ -55,7 +56,15 @@ class ProductsController
             echo json_encode(['error' => true, 'message' => 'Identificação do produto não encontrada!']);
             exit();
         }
-        $data['id'] = $id;
-        echo json_encode($this->model->deleteProduct($data));
+        echo json_encode($this->model->deleteProduct(['id' => $id]));
+    }
+
+    public function registerProduct()
+    {
+        $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $formData['productCode'] === 0 ? null : $formData['productCode'];
+        $formData['productExpiration'] = Common::convertDateToDataBase($formData['productExpiration']);
+
+        echo json_encode($this->model->registerProduct($formData));
     }
 }

@@ -12,6 +12,12 @@
     <?php if ($this->controller === '404') : ?>
         <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/custom/404.css">
     <?php endif; ?>
+    <?php if ($this->controller === 'products') : ?>
+        <?php if ($this->action === 'register' || $this->action === 'edit') : ?>
+            <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/jquery/jquery-ui.min.css">
+            <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/jquery/jquery-ui.theme.min.css">
+        <?php endif; ?>
+    <?php endif; ?>
     <link rel="icon" href="<?= ASSETS_PATH; ?>/img/favicon.ico">
 </head>
 
@@ -24,4 +30,4 @@
     <div class="col-md-12 col-xl-12">
         <?php require VIEWS_INCLUDES_PATH . 'messages.view.php'; ?>
     </div>
-    <div class="container">
+    <div class="container-fluid">

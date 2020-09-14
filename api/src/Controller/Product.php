@@ -10,25 +10,34 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Product
 {
+    private function handleDataProduct(array $data): array
+    {
+        $param = [
+            'productCode' => 'code',
+            'productName' => 'name',
+            'productPrice' => 'price',
+            'productExpiration' => 'expiration',
+            'productDescription' => 'description',
+        ];
+        $arr = [];
+        foreach ($data as $key => $value) {
+            $arr[$param[$key]] = empty($data[$key]) ? null : $value;
+        }
+        return $arr;
+    }
     public function productRegister(Request $request, Response $response, $args)
     {
         try {
             $conn = Connection::getInstance();
-            $login = $request->getParsedBody()['login'];
-            $password = $request->getParsedBody()['password'];
+            $data = $this->handleDataProduct($request->getParsedBody());
             $stmt = $conn->prepare(
-                'INSERT INTO user_access
-                    SET login = :login,
-                        password = :password,
-                        access_level_id = :access_level_id'
+                'INSERT INTO products (productCode, name, price, dateExpiration, description)
+                VALUES (:code, :name, :price, :expiration, :description)'
             );
-            $stmt->bindValue(':login', $login, \PDO::PARAM_STR);
-            $stmt->bindValue(':password', $password, \PDO::PARAM_STR);
-            $stmt->bindValue(':access_level_id', 1, \PDO::PARAM_INT);
-            $stmt->execute();
-            $retorno = ['error' => true, 'message' => 'Erro ao inserir usuário!'];
+            $stmt->execute($data);
+            $retorno = ['error' => true, 'message' => 'Erro ao inserir produto!'];
             if ($stmt->rowCount() > 0) {
-                $retorno = ['message' => 'Usuário cadastrado com sucesso!'];
+                $retorno = ['message' => 'Produto cadastrado com sucesso!'];
             }
         } catch (\PDOException $pEx) {
             $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
@@ -41,7 +50,7 @@ class Product
     {
         try {
             $conn = Connection::getInstance();
-            $stmt = $conn->query('SELECT * FROM products');
+            $stmt = $conn->query('CALL getAllProductsNotExpired()');
             $retorno = ['error' => true, 'message' => 'Nenhum produto encontrado!'];
             if ($stmt->rowCount() > 0) {
                 $retorno = $stmt->fetchAll();
