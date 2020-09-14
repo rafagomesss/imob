@@ -1,6 +1,10 @@
 ﻿CREATE DATABASE fruitshop CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE fruitshop;
 
+#####################################################################
+############################# PRODUTOS #############################
+#####################################################################
+
 # DROP TABLE products;
 CREATE TABLE IF NOT EXISTS products (
   id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -15,12 +19,34 @@ CREATE TABLE IF NOT EXISTS products (
 # DESC products;
 # SELECT * FROM products;
 # TRUNCATE products;
+
 # INSERT INTO products VALUES(0, 35687458, 'Laranja', 'Fruta Cítrica', DATE('2020-09-05 d-M-Y'), null, 2.98);
 # -- ERRO AO INSERIR-> INSERT INTO products VALUES(0, 35687458, 'Abacate', 'Fruta fonte de boa gordura', DATE('2020-09-05 d-M-Y'), null, 2.98); -- #
 # INSERT INTO products VALUES(0, NULL, 'Pêra', 'Fruta Macia', DATE('2020-09-05 d-M-Y'), null, 3.15);
 # INSERT INTO products VALUES(0, NULL, 'Maça', 'Fruta', DATE('2020-09-05 d-M-Y'), null, 8.50);
 # INSERT INTO products VALUES(0, NULL, 'Uva', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ornare sem arcu, non eleifend arcu hendrerit vel. Suspendisse in eros feugiat, aliquam purus nec, semper nibh. Sed fermentum elit lectus, in sodales nulla dignissim vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc gravida nisi non nisi interdum pulvinar. Nullam porttitor mi sem, a laoreet lectus rutrum vitae. Aliquam erat volutpat. Vestibulum tincidunt sed risus vitae fermentum. Nunc ut velit dui. Nunc lorem nibh, malesuada id risus aliquam, accumsan porttitor nisl. Aenean ex neque, ullamcorper non facilisis at, laoreet quis massa. In in vehicula erat. Donec molestie eros ac faucibus varius.', DATE('2020-09-05 d-M-Y'), null, 8.50);
 
+USE fruitshop;
+DELIMITER //
+
+CREATE PROCEDURE getAllProductsNotExpired()
+BEGIN
+   SELECT
+      *
+    FROM products
+    WHERE DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
+      OR dateExpiration IS NULL
+    ORDER BY dateRegister;
+END //
+
+DELIMITER ;
+
+# CALL getAllProductsNotExpired();
+
+
+#####################################################################
+############################## VENDAS ###############################
+#####################################################################
 
 # DROP TABLE sales;
 CREATE TABLE IF NOT EXISTS sales (
@@ -35,6 +61,10 @@ CREATE TABLE IF NOT EXISTS sales (
 )ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # SELECT * FROM sales;
 
+
+#####################################################################
+############################# CLIENTES ##############################
+#####################################################################
 # DROP TABLE customers;
 CREATE TABLE IF NOT EXISTS customers (
   id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -50,6 +80,9 @@ CREATE TABLE IF NOT EXISTS customers (
 )ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # SELECT * FROM customers;
 
+#####################################################################
+############################## ACESSO ###############################
+#####################################################################
 # DROP table access_level;
 CREATE TABLE IF NOT EXISTS access_level (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -82,30 +115,3 @@ CREATE TABLE IF NOT EXISTS user_access
 
 # INSERT INTO user_access (login, password, access_level_id) VALUES('gomes', '12345', 1);
 # SHOW TABLES;
-
-use fruitshop;
-DELIMITER //
-
-CREATE PROCEDURE getAllProductsNotExpired()
-BEGIN
-	 SELECT
-      *
-    FROM products
-    WHERE DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
-      OR dateExpiration IS NULL
-    ORDER BY dateRegister;
-END //
-
-DELIMITER ;
-
-# CALL getAllProductsNotExpired();
-
-
-
-UPDATE products
-                    SET productCode = 3567,
-                        name = 'Maçã Verde',
-                        price = 8.95,
-                        dateExpiration = NOW() +2 ,
-                        description = 'Agora é uma maçã verde!'
-                WHERE id = 1;
