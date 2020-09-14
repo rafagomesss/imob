@@ -1,18 +1,34 @@
 $(document).ready(() => {
     $('.delete-product').on('click', (event) => {
-        const productId = $(event.target).attr('data-id');
-        $.ajax({
-            url: '/products/delete/',
-            type: 'POST',
-            dataType: 'JSON',
-            data: { productId },
-        }).done((response) => {
-            handleDoneAlerts(response);
-        }).fail((response) => {
-            console.log(response.responseText);
-            triggerAlert(response.responseText, 'error', 'OK');
-            return false;
+        const productId = $(event.target).data('id');
+        Swal.fire({
+            title: 'Atenção!',
+            html: '<p>Deseja realmente cancelar o produto: <b>"' + $(event.target).data('name') + '"</b>?</p>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: 'Cancelar',
+            toast: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.showLoading();
+                $.ajax({
+                    url: '/products/delete/',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { productId },
+                }).done((response) => {
+                    handleDoneAlerts(response);
+                }).fail((response) => {
+                    triggerAlert(response.responseText, 'error', 'OK');
+                    return false;
+                });
+            }
         });
+
     });
 });
 

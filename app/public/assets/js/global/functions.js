@@ -44,3 +44,12 @@ function removeBorderDanger(field) {
         $(input).removeClass('border-danger');
     }
 }
+
+function encryptDecrypt(string, decrypt = false) {
+    if (string.length) {
+        if (decrypt) {
+            return atob(string).slice(0, -5);
+        }
+        return btoa(string, '%$#@!');
+    }
+}

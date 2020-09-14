@@ -41,7 +41,7 @@ use System\Common; ?>
                                                 <a class="btn btn-sm btn-success mr-sm-0 px-2 mb-2" href="<?= SITE_URL; ?>/products/edit/<?= $product['id']; ?>">
                                                     <i class="far fa-edit"></i> Editar
                                                 </a>
-                                                <a class="btn btn-sm btn-danger delete-product" data-id="<?= $product['id']; ?>">
+                                                <a class="btn btn-sm btn-danger delete-product" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>">
                                                     <i class="far fa-trash-alt"></i> Excluir
                                                 </a>
                                             </td>

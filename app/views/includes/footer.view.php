@@ -16,14 +16,18 @@
 	<?php endif; ?>
 	<?php if ($this->controller === 'products') : ?>
 		<?php if ($this->action === 'edit') : ?>
-			<script src="<?= JS_PATH; ?>/products/edit.js" type="text/javascript"></script>
-		<?php endif; ?>
-		<?php if ($this->action === 'register') : ?>
-			<script src="<?= JS_PATH; ?>/products/register.js" type="text/javascript"></script>
 			<script src="<?= JS_PATH; ?>/jquery/jquery.mask.min.js" type="text/javascript"></script>
 			<script src="<?= JS_PATH; ?>/jquery/jquery.easing.min.js" type="text/javascript"></script>
 			<script src="<?= JS_PATH; ?>/jquery/jquery-ui.min.js" type="text/javascript"></script>
 			<script src="<?= JS_PATH; ?>/jquery/jquery.ui.datepicker-pt-BR.js" type="text/javascript"></script>
+			<script src="<?= JS_PATH; ?>/products/edit.js" type="text/javascript"></script>
+		<?php endif; ?>
+		<?php if ($this->action === 'register') : ?>
+			<script src="<?= JS_PATH; ?>/jquery/jquery.mask.min.js" type="text/javascript"></script>
+			<script src="<?= JS_PATH; ?>/jquery/jquery.easing.min.js" type="text/javascript"></script>
+			<script src="<?= JS_PATH; ?>/jquery/jquery-ui.min.js" type="text/javascript"></script>
+			<script src="<?= JS_PATH; ?>/jquery/jquery.ui.datepicker-pt-BR.js" type="text/javascript"></script>
+			<script src="<?= JS_PATH; ?>/products/register.js" type="text/javascript"></script>
 		<?php endif; ?>
 		<?php if ($this->action === 'list') : ?>
 			<script src="<?= JS_PATH; ?>/products/list.js" type="text/javascript"></script>

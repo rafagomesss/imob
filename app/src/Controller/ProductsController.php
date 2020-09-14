@@ -62,9 +62,16 @@ class ProductsController
     public function registerProduct()
     {
         $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $formData['productCode'] === 0 ? null : $formData['productCode'];
+        $formData['productExpiration'] = Common::convertDateToDataBase($formData['productExpiration']);
+        echo json_encode($this->model->registerProduct($formData));
+    }
+
+    public function updateProduct()
+    {
+        $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $formData['idProduct'] = Common::encryptDecryptData($formData['idProduct'], true);
         $formData['productExpiration'] = Common::convertDateToDataBase($formData['productExpiration']);
 
-        echo json_encode($this->model->registerProduct($formData));
+        echo json_encode($this->model->updateProduct($formData));
     }
 }

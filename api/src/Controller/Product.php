@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Product
 {
-    private function handleDataProduct(array $data): array
+    private function handleDataProduct(array $data, string $method = 'register'): array
     {
         $param = [
             'productCode' => 'code',
@@ -19,12 +19,16 @@ class Product
             'productExpiration' => 'expiration',
             'productDescription' => 'description',
         ];
+        if ($method === 'update') {
+            $param['idProduct'] = 'id';
+        }
         $arr = [];
         foreach ($data as $key => $value) {
             $arr[$param[$key]] = empty($data[$key]) ? null : $value;
         }
         return $arr;
     }
+
     public function productRegister(Request $request, Response $response, $args)
     {
         try {
@@ -81,7 +85,7 @@ class Product
         return $response;
     }
 
-    public function edit(Request $request, Response $response, $args)
+    public function getProduct(Request $request, Response $response, $args)
     {
         try {
             $conn = Connection::getInstance();
@@ -92,6 +96,34 @@ class Product
             $retorno = ['error' => true, 'message' => 'Produto não encontrado!'];
             if ($stmt->rowCount() > 0) {
                 $retorno = $stmt->fetch();
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        } catch (\Throwable $t) {
+            $retorno = ['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
+
+    public function update(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $data = $this->handleDataProduct($request->getParsedBody(), 'update');
+            $stmt = $conn->prepare(
+                'UPDATE products
+                    SET productCode = :code,
+                        name = :name,
+                        price = :price,
+                        dateExpiration = :expiration,
+                        description = :description
+                WHERE id = :id'
+            );
+            $stmt->execute($data);
+            $retorno = ['error' => true, 'message' => 'Produto não encontrado!'];
+            if ($stmt->execute($data) || $stmt->rowCount() > 0) {
+                $retorno = ['message' => 'Produto atualizado com sucesso!'];
             }
         } catch (\PDOException $pEx) {
             $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];

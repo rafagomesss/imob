@@ -1,3 +1,6 @@
+<?php
+
+use System\Common; ?>
 <div class="row justify-content-center">
     <div class="col-8">
         <div class="row">
@@ -7,7 +10,10 @@
                         <h2><?= $this->action === 'edit' ? 'Editar' : 'Cadastrar'; ?> Produto</h2>
                     </div>
                 </div>
-                <form id="form<?= $this->action === 'edit' ? 'Edit' : 'Register'; ?>Product" method="POST">
+                <form id="form<?= $this->action === 'edit' ? 'Update' : 'Register'; ?>Product" method="POST">
+                    <?php if ($this->action === 'edit') : ?>
+                        <input type="hidden" id="idProduct" name="idProduct" value="<?= Common::encryptDecryptData($this->product['id']); ?>">
+                    <?php endif; ?>
                     <div class="row justify-content-center mb-2">
                         <div class="col-md-3">
                             <label for="productCode">Código Produto</label>
@@ -27,13 +33,13 @@
                         </div>
                         <div class="col-md-6">
                             <label for="productExpiration">Data de Validade</label>
-                            <input type="text" class="form-control" name="productExpiration" id="productExpiration" value="<?= $this->product['dateExpiration'] ?? null; ?>" />
+                            <input type="text" class="form-control" name="productExpiration" id="productExpiration" value="<?= Common::convertDateDataBaseToBr($this->product['dateExpiration']) ?? null; ?>" />
                         </div>
                     </div>
                     <div class="row justify-content-center mb-4">
                         <div class="col-md-12">
                             <label for="productDescription">Descrição do produto</label>
-                            <textarea class="form-control" name="productDescription" id="productDescription" rows="4" placeholder="Informações pertinentes sobre o produto"><?= $this->product['description'] ?? null; ?></textarea>
+                            <textarea class="form-control" name="productDescription" id="productDescription" rows="4" maxlength="200" placeholder="Informações pertinentes sobre o produto"><?= $this->product['description'] ?? null; ?></textarea>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-2">

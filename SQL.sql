@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS user_access
 # INSERT INTO user_access (login, password, access_level_id) VALUES('gomes', '12345', 1);
 # SHOW TABLES;
 
-
+use fruitshop;
 DELIMITER //
 
 CREATE PROCEDURE getAllProductsNotExpired()
@@ -98,3 +98,14 @@ END //
 
 DELIMITER ;
 
+# CALL getAllProductsNotExpired();
+
+
+
+UPDATE products
+                    SET productCode = 3567,
+                        name = 'Maçã Verde',
+                        price = 8.95,
+                        dateExpiration = NOW() +2 ,
+                        description = 'Agora é uma maçã verde!'
+                WHERE id = 1;

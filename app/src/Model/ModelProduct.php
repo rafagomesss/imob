@@ -13,6 +13,11 @@ class ModelProduct
         return RequestAPI::sendRequest(URL_API . '/product/register', $param);
     }
 
+    public function updateProduct(array $param)
+    {
+        return RequestAPI::sendRequest(URL_API . '/product/update', $param);
+    }
+
     public function getAll(): array
     {
         return RequestAPI::sendRequest(URL_API . '/product/listAll');

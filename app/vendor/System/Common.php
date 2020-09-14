@@ -29,4 +29,14 @@ class Common
         }
         return null;
     }
+
+    public static function encryptDecryptData(string $data, $decrypt = false): string
+    {
+        if (!empty($data)) {
+            if ($decrypt) {
+                return substr(base64_decode($data), 0, -5);
+            }
+            return base64_encode($data . '%$#@!');
+        }
+    }
 }
