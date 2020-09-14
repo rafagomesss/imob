@@ -70,7 +70,6 @@ class AuthController
                 exit();
             }
         }
-        $retorno = ['error' => true, 'message' => 'Usuário e/ou senha inválido(s)!'];
         echo json_encode($retorno);
     }
 

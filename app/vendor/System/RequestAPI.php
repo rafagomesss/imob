@@ -16,8 +16,11 @@ class RequestAPI
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $resp = json_decode(curl_exec($ch), true);
+        $resp = curl_exec($ch);
         curl_close($ch);
-        return $resp;
+        if ($resp) {
+            return json_decode($resp, true);
+        }
+        return ['error' => true, 'message' => 'Servidor fora do ar!'];
     }
 }
