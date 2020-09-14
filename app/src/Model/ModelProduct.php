@@ -46,7 +46,7 @@ class ModelProduct
     public function deleteProduct(array $id)
     {
         $return = RequestAPI::sendRequest(URL_API . '/product/delete', $id);
-        $this->handleErrorServer($return);
+        $this->handleErrorServer($return, true);
         return $return;
     }
 
