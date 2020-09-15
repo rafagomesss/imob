@@ -29,7 +29,7 @@ use System\Common; ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($this->products['error']) && is_array($this->products) && count($this->products)) : ?>
+                                <?php if (!empty($this->products[0]['id']) && is_array($this->products) && count($this->products)) : ?>
                                     <?php foreach ($this->products as $product) : ?>
                                         <tr class="text-center">
                                             <td class="align-middle" scope="row"><?= $product['productCode'] ?? '-'; ?></td>
@@ -38,7 +38,7 @@ use System\Common; ?>
                                             <td class="align-middle"><?= Common::convertDateDataBaseToBr($product['dateExpiration']) ?? '-'; ?></td>
                                             <td class="align-middle text-justify"><?= $product['description'] ?? '-'; ?> </td>
                                             <td class="align-middle text-center">
-                                                <a class="btn btn-sm btn-success mr-sm-0 px-2 mb-2" href="<?= SITE_URL; ?>/products/edit/<?= $product['id']; ?>">
+                                                <a class="btn btn-sm btn-success mr-sm-0 px-2 edit-product" href="<?= SITE_URL; ?>/products/edit/<?= $product['id']; ?>">
                                                     <i class="far fa-edit"></i> Editar
                                                 </a>
                                                 <a class="btn btn-sm btn-danger delete-product" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>">

@@ -16,11 +16,16 @@ class RequestAPI
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $resp = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            return ['error' => curl_errno($ch), 'message' => curl_error($ch)];
+        }
         curl_close($ch);
         if ($resp) {
             return json_decode($resp, true);
         }
-        return ['error' => true, 'message' => 'Servidor fora do ar!'];
+        return $resp;
     }
 }

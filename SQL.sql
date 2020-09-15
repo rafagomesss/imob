@@ -6,15 +6,16 @@ USE fruitshop;
 #####################################################################
 
 # DROP TABLE products;
-CREATE TABLE IF NOT EXISTS products (
-  id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
-  productCode INT(8) UNSIGNED UNIQUE DEFAULT NULL,
-  name VARCHAR(200) NOT NULL,
-  description VARCHAR(200) DEFAULT NULL,
-  dateExpiration DATETIME DEFAULT NULL,
-  dateRegister DATETIME DEFAULT CURRENT_TIMESTAMP,
-  price DECIMAL(10, 2),
-  PRIMARY KEY (id)
+CREATE TABLE IF NOT EXISTS products
+(
+    id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
+    productCode VARCHAR(8) UNIQUE DEFAULT NULL,
+    name VARCHAR(200) NOT NULL,
+    description VARCHAR(200) DEFAULT NULL,
+    dateExpiration DATETIME DEFAULT NULL,
+    dateRegister DATETIME DEFAULT CURRENT_TIMESTAMP,
+    price DECIMAL(10, 2),
+    PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # DESC products;
 # SELECT * FROM products;
@@ -26,22 +27,53 @@ CREATE TABLE IF NOT EXISTS products (
 # INSERT INTO products VALUES(0, NULL, 'Maça', 'Fruta', DATE('2020-09-05 d-M-Y'), null, 8.50);
 # INSERT INTO products VALUES(0, NULL, 'Uva', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ornare sem arcu, non eleifend arcu hendrerit vel. Suspendisse in eros feugiat, aliquam purus nec, semper nibh. Sed fermentum elit lectus, in sodales nulla dignissim vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc gravida nisi non nisi interdum pulvinar. Nullam porttitor mi sem, a laoreet lectus rutrum vitae. Aliquam erat volutpat. Vestibulum tincidunt sed risus vitae fermentum. Nunc ut velit dui. Nunc lorem nibh, malesuada id risus aliquam, accumsan porttitor nisl. Aenean ex neque, ullamcorper non facilisis at, laoreet quis massa. In in vehicula erat. Donec molestie eros ac faucibus varius.', DATE('2020-09-05 d-M-Y'), null, 8.50);
 
+
 USE fruitshop;
+# DROP PROCEDURE getAllProductsNotExpired;
+
 DELIMITER //
 
-CREATE PROCEDURE getAllProductsNotExpired()
+CREATE PROCEDURE getAllProductsNotExpired(
+    IN code VARCHAR(8),
+    IN product VARCHAR(200)
+)
 BEGIN
-   SELECT
-      *
+
+    SET @code := IF(code IS NULL, '', code);
+    SET @product := IF(product IS NULL, '', product);
+
+    SELECT
+        *
     FROM products
-    WHERE DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
-      OR dateExpiration IS NULL
+    WHERE productCode LIKE CONCAT(@code , '%')
+        AND name LIKE CONCAT( @product , '%')
+        AND (
+                DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
+                    OR dateExpiration IS NULL
+            )
+    ORDER BY dateRegister;
+
+END //
+
+DELIMITER ;
+
+# CALL getAllProductsNotExpired('9548754',	'Limão');
+
+USE fruitshop;
+# DROP PROCEDURE getAllProducts;
+DELIMITER //
+*/
+CREATE PROCEDURE IF NOT EXISTS getAllProducts()
+BEGIN
+    SELECT
+        *
+    FROM products
     ORDER BY dateRegister;
 END //
 
 DELIMITER ;
 
-# CALL getAllProductsNotExpired();
+# CALL getAllProducts();
 
 
 #####################################################################
@@ -49,16 +81,17 @@ DELIMITER ;
 #####################################################################
 
 # DROP TABLE sales;
-CREATE TABLE IF NOT EXISTS sales (
-  saleId INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
-  productId INT(10) UNSIGNED NOT NULL,
-  custormerId INT(10) UNSIGNED NOT NULL,
-  quantity INT(10) UNSIGNED DEFAULT 1,
-  productPrice DECIMAL(10, 2),
-  dateSale DATETIME,
-  total DECIMAL(10, 2),
-  PRIMARY KEY (id)
-)ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
+CREATE TABLE IF NOT EXISTS sales
+(
+    saleId INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
+    productId INT(10) UNSIGNED NOT NULL,
+    custormerId INT(10) UNSIGNED NOT NULL,
+    quantity INT(10) UNSIGNED DEFAULT 1,
+    productPrice DECIMAL(10, 2),
+    dateSale DATETIME,
+    total DECIMAL(10, 2),
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # SELECT * FROM sales;
 
 
@@ -66,29 +99,31 @@ CREATE TABLE IF NOT EXISTS sales (
 ############################# CLIENTES ##############################
 #####################################################################
 # DROP TABLE customers;
-CREATE TABLE IF NOT EXISTS customers (
-  id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
-  name VARCHAR(200) NOT NULL,
-  cpf INT(11) UNSIGNED UNIQUE NOT NULL,
-  address VARCHAR(200),
-  complement VARCHAR(200),
-  cellphone VARCHAR(16) NOT NULL,
-  contact VARCHAR(16),
-  gender CHAR(1),
-  dateBirth DATETIME
-  PRIMARY KEY (id)
-)ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
+CREATE TABLE IF NOT EXISTS customers
+(
+    id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    cpf INT(11) UNSIGNED UNIQUE NOT NULL,
+    address VARCHAR(200),
+    complement VARCHAR(200),
+    cellphone VARCHAR(16) NOT NULL,
+    contact VARCHAR(16),
+    gender CHAR(1),
+    dateBirth DATETIME
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 # SELECT * FROM customers;
 
 #####################################################################
 ############################## ACESSO ###############################
 #####################################################################
 # DROP table access_level;
-CREATE TABLE IF NOT EXISTS access_level (
-  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	description VARCHAR(255) UNIQUE NOT NULL,
-  PRIMARY KEY (id)
-)ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
+CREATE TABLE IF NOT EXISTS access_level
+(
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    description VARCHAR(255) UNIQUE NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
 
 INSERT INTO access_level (description) VALUES ('ADMIN'), ('USER');
 

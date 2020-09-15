@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $('#btnAccessSystem').on('click', () => {
+    $('#btnAccessSystem').on('click', (event) => {
         const inputs = $(':input[required]:visible');
         if (formFieldValidate(inputs)) {
             const data = $('#formLogin').serializeArray();
@@ -8,6 +8,9 @@ $(document).ready(() => {
                 type: 'POST',
                 dataType: 'JSON',
                 data: data,
+                beforeSend: () => {
+                    loadingButtonState(event.target);
+                }
             }).done(function (response) {
                 if (response.error) {
                     triggerAlert(response.message, 'warning', 'OK');
@@ -20,7 +23,7 @@ $(document).ready(() => {
                 triggerAlert(response.responseText, 'error', 'OK');
                 return false;
             }).always(function () {
-
+                loadingButtonState(event.target, 'Entrar', false);
             });
         }
 

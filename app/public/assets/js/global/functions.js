@@ -53,3 +53,11 @@ function encryptDecrypt(string, decrypt = false) {
         return btoa(string, '%$#@!');
     }
 }
+
+function loadingButtonState(button, html = ' Carregando...', disabled = true) {
+    if ($(button).length) {
+        const spanLoading = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+        $(button).html(disabled ? spanLoading + html : '' + html);
+        $(button).prop('disabled', disabled);
+    }
+}

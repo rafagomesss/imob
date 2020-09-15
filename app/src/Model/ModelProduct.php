@@ -8,20 +8,8 @@ use System\Common;
 use System\Flash;
 use System\RequestAPI;
 
-class ModelProduct
+class ModelProduct extends Model
 {
-    private function handleErrorServer(array $response, bool $ajax = false): void
-    {
-        if (!empty($response['error'])) {
-            if ($ajax) {
-                echo json_encode(['error' => true, 'message' => $response['message']]);
-                exit();
-            }
-            Flash::set('danger', $response['message']);
-            Common::redirect('/');
-            exit();
-        }
-    }
     public function registerProduct(array $param)
     {
         $return = RequestAPI::sendRequest(URL_API . '/product/register', $param);

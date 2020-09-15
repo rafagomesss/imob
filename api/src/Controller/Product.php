@@ -54,8 +54,8 @@ class Product
     {
         try {
             $conn = Connection::getInstance();
-            $stmt = $conn->query('CALL getAllProductsNotExpired()');
-            $retorno = ['error' => true, 'message' => 'Nenhum produto encontrado!'];
+            $stmt = $conn->query('CALL getAllProducts()');
+            $retorno = ['error' => false, 'message' => 'Nenhum produto encontrado!'];
             if ($stmt->rowCount() > 0) {
                 $retorno = $stmt->fetchAll();
             }
