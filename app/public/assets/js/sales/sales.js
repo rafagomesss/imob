@@ -82,5 +82,7 @@ function mountDataOnTable() {
             </tr>`;
     $('#tableListItems tbody').html(html);
     resetStateValues();
+    $('#productCode').val('');
+    $('#productCode').focus();
     return false;
 }
