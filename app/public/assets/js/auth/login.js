@@ -19,7 +19,6 @@ $(document).ready(() => {
                 window.location.href = '/sales';
                 return true;
             }).fail(function (response) {
-                console.log(response)
                 triggerAlert(response.responseText, 'error', 'OK');
                 return false;
             }).always(function () {

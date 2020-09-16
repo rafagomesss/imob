@@ -50,7 +50,7 @@ function encryptDecrypt(string, decrypt = false) {
         if (decrypt) {
             return atob(string).slice(0, -5);
         }
-        return btoa(string, '%$#@!');
+        return btoa(string + '%$#@!');
     }
 }
 

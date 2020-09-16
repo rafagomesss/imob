@@ -39,6 +39,12 @@ $(document).ready(() => {
     });
 });
 
+$(document).on('click', '.remove-item', (event) => {
+    const tdId = $(event.currentTarget).data('id');
+    console.log(tdId, $(`tr#${tdId}`), event);
+    $(`#tableListItems tr#${tdId}`).remove();
+});
+
 function mountDataOnForm(data) {
     if (data[0] !== undefined) {
         $('#productId').val(data[0].id.length ? encryptDecrypt(data[0].id) : null);
@@ -69,8 +75,9 @@ function resetStateValues() {
 }
 
 function mountDataOnTable() {
+    const trId = $('#tableListItems tr').length;
     let html = $('#tableListItems tbody').html();
-    html += `<tr>
+    html += `<tr id="${trId + 1}">
                 <td class='text-center'>${$('#code').val()}</td>
                 <td class='text-center'>${$('#name').val()}</td>
                 <td class='text-center'>${$('#quantity').val()}</td>
@@ -78,7 +85,11 @@ function mountDataOnTable() {
                 <td class='text-center'>UN</td>
                 <td class='text-center'>${$('#productPriceOff').val()}</td>
                 <td class='text-center'>${$('#totalValue').val()}</td>
-                <td class='text-center'><i class="far fa-trash-alt"></i></td>
+                <td class='text-center'>
+                    <a class='remove-item pointer' data-id='${trId + 1}'>
+                        <i class=" far fa-trash-alt"></i>
+                    </a>
+                </td>
             </tr>`;
     $('#tableListItems tbody').html(html);
     resetStateValues();

@@ -19,7 +19,6 @@ $(document).ready(() => {
             }).done(function (response) {
                 handleDoneAlerts(response);
             }).fail(function (response) {
-                console.log(response)
                 triggerAlert(response.responseText, 'error', 'OK');
                 return false;
             }).always(function () {
