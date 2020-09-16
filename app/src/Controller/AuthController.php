@@ -69,8 +69,10 @@ class AuthController
                 echo json_encode($retorno);
                 exit();
             }
+            $retorno = ['error' => true, 'message' => 'Usuário e/ou senha inválido(s)!'];
         }
         echo json_encode($retorno);
+        exit();
     }
 
     public function register()
