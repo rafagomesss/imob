@@ -37,21 +37,21 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="quantity" class="col-form-label">Qtde.</label>
-                                    <input id="quantity" type="text" class="form-control" pattern="[0-9]{3}" disabled />
+                                    <input id="quantity" type="text" class="form-control" pattern="[0-9]{3}" disabled value="0" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="productPrice" class="col-form-label">Valor Unitário</label>
-                                    <input id="productPrice" type="text" class="form-control" disabled />
+                                    <input id="productPrice" type="text" class="form-control money" disabled value="0" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="productPriceOff" class="col-form-label">Desconto</label>
-                                    <input id="productPriceOff" type="text" class="form-control" disabled />
+                                    <input id="productPriceOff" type="text" class="form-control money" disabled value="0" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="totalValue" class="col-form-label">Valor Total</label>
-                                    <input id="totalValue" type="text" class="form-control" disabled />
+                                    <input id="totalValue" type="text" class="form-control money" disabled value="0" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="productExpiration" class="col-form-label">Data de Validade</label>

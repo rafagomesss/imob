@@ -6,6 +6,19 @@ $(document).ready(() => {
             A: { pattern: /[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]/g },
         }
     });
+
+    $('.money').keypress(function (eve) {
+        if ((eve.which != 46 || $(this).val().indexOf('.') != -1) && (eve.which < 48 || eve.which > 57) || (eve.which == 46 && $(this).caret().start == 0)) {
+            eve.preventDefault();
+        }
+
+        $('.money').keyup(function (eve) {
+            if ($(this).val().indexOf('.') == 0) {
+                $(this).val($(this).val().substring(1));
+            }
+        });
+    });
+
     $('#productCode, #productName').on('keyup', (event) => {
         if (event.target.value.length) {
             const productCode = $('input[name="code"]').val();
@@ -37,11 +50,14 @@ $(document).ready(() => {
         }
         mountDataOnTable();
     });
+
+    $('#quantity, #productPriceOff').on('keyup change', () => {
+        calculateItemAddTotal();
+    })
 });
 
 $(document).on('click', '.remove-item', (event) => {
     const tdId = $(event.currentTarget).data('id');
-    console.log(tdId, $(`tr#${tdId}`), event);
     $(`#tableListItems tr#${tdId}`).remove();
 });
 
@@ -66,8 +82,11 @@ function resetStateValues() {
     $('#productId').val('');
     $('#code').val('');
     $('#name').val('');
-    $('#productPrice').val('');
+    $('#productPrice').val(0);
     $('#productExpiration').val('');
+    $('#productPriceOff').val(0);
+    $('#totalValue').val(0);
+    $('#quantity').val(0);
     $('#productPriceOff').prop('disabled', true);
     $('#totalValue').prop('disabled', true);
     $('#quantity').prop('disabled', true);
@@ -96,4 +115,12 @@ function mountDataOnTable() {
     $('#productCode').val('');
     $('#productCode').focus();
     return false;
+}
+
+function calculateItemAddTotal() {
+    const quantity = $('#quantity').val().length ? $('#quantity').val() : 0;
+    const productPrice = $('#productPrice').val().length ? $('#productPrice').val() : 0;
+    const off = $('#productPriceOff').val().length ? $('#productPriceOff').val() : 0;
+    const totalValue = (quantity * productPrice) - off;
+    $('#totalValue').val(totalValue === 0 ? 0 : totalValue.toFixed(2));
 }
