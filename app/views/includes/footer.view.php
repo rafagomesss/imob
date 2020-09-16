@@ -14,6 +14,10 @@
 			<script src="<?= JS_PATH; ?>/auth/login.js" type="text/javascript"></script>
 		<?php endif; ?>
 	<?php endif; ?>
+	<?php if ($this->controller === 'sales') : ?>
+		<script src="<?= JS_PATH; ?>/jquery/jquery.mask.min.js" type="text/javascript"></script>
+		<script src="<?= JS_PATH; ?>/sales/sales.js" type="text/javascript"></script>
+	<?php endif; ?>
 	<?php if ($this->controller === 'products') : ?>
 		<?php if ($this->action === 'edit') : ?>
 			<script src="<?= JS_PATH; ?>/jquery/jquery.mask.min.js" type="text/javascript"></script>

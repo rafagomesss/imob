@@ -1,5 +1,6 @@
 <?php
 
+use Api\Exception\ApiException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -16,11 +17,12 @@ try {
     $app->post('/product/delete', 'Api\Controller\Product:delete');
     $app->post('/product/edit', 'Api\Controller\Product:getProduct');
     $app->post('/product/update', 'Api\Controller\Product:update');
+    $app->post('/product/getProductByNameCode', 'Api\Controller\Product:getByCodeName');
 
 
     $app->run();
 } catch (\Throwable $t) {
-    echo json_encode(['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()]);
+    ApiException::printException($t);
 } catch (\Exception $e) {
-    echo json_encode(['error' => true, 'code' => $e->getCode(), 'message' => $e->getMessage(), 'line' => $e->getLine(), 'file' => $e->getFile()]);
+    ApiException::printException($e);
 }

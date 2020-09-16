@@ -45,6 +45,7 @@ class Router extends Request
         }
         $controller = $this->getController();
         $response = call_user_func_array([new $controller, $this->getAction()], [$this->getArgs()]);
+
         print $response;
     }
 

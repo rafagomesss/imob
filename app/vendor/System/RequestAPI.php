@@ -26,6 +26,8 @@ class RequestAPI
         if ($resp) {
             return json_decode($resp, true);
         }
+        echo '<pre>' . print_r($resp, true) . '</pre>';
+        exit();
         return $resp;
     }
 }

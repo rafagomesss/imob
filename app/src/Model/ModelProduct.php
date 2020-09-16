@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Imob\Model;
 
-use System\Common;
-use System\Flash;
 use System\RequestAPI;
 
 class ModelProduct extends Model

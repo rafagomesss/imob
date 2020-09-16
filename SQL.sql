@@ -30,29 +30,59 @@ CREATE TABLE IF NOT EXISTS products
 
 USE fruitshop;
 # DROP PROCEDURE getAllProductsNotExpired;
-
 DELIMITER //
 
 CREATE PROCEDURE getAllProductsNotExpired(
-    IN code VARCHAR(8),
-    IN product VARCHAR(200)
+  IN code VARCHAR(8),
+  IN product VARCHAR(200)
 )
 BEGIN
-
-    SET @code := IF(code IS NULL, '', code);
-    SET @product := IF(product IS NULL, '', product);
-
+  SET @code := IF(code IS NULL, '', code);
+  SET @product := IF(product IS NULL, '', product);
     SELECT
         *
     FROM products
-    WHERE productCode LIKE CONCAT(@code , '%')
-        AND name LIKE CONCAT( @product , '%')
-        AND (
-                DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
-                    OR dateExpiration IS NULL
-            )
-    ORDER BY dateRegister;
+    WHERE 
+      productCode LIKE CONCAT(@code , '%') AND
+      name LIKE CONCAT( '%', @product , '%')
+      AND (DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
+        OR dateExpiration IS NULL)
+    ORDER BY CAST(productCode AS INT), dateRegister;
+END //     
 
+DELIMITER ;
+
+  CALL getAllProductsNotExpired(null, 'A');
+
+DELIMITER $$
+
+CREATE PROCEDURE debug_msg(enabled INTEGER, msg VARCHAR(255))
+BEGIN
+  IF enabled THEN
+    select concat('** ', msg) AS '** DEBUG:';
+  END IF;
+END $$
+
+DELIMITER ;
+
+/*
+USE fruitshop;
+# DROP PROCEDURE getAllProductsNotExpired;
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS getAllProductsNotExpired(
+    IN code INT(8),
+    IN product VARCHAR(200)
+)
+BEGIN
+    SELECT
+        *
+    FROM products
+    WHERE CAST(productCode as VARCHAR(8)) LIKE '%' + code + '%'
+        AND  name LIKE '%' + product+ '%'
+        AND (DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
+        OR dateExpiration IS NULL)
+    ORDER BY dateRegister;
 END //
 
 DELIMITER ;

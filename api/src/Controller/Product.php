@@ -133,4 +133,24 @@ class Product
         $response->getBody()->write(json_encode($retorno));
         return $response;
     }
+
+    public function getByCodeName(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $data = $this->handleDataProduct($request->getParsedBody());
+            $stmt = $conn->prepare('CALL getAllProductsNotExpired(:code, :name)');
+            $stmt->execute($data);
+            $retorno = [];
+            if ($stmt->rowCount() > 0) {
+                $retorno = $stmt->fetchAll();
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        } catch (\Throwable $t) {
+            $retorno = ['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
 }
