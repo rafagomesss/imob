@@ -25,6 +25,5 @@ $(document).ready(() => {
                 loadingButtonState(event.target, 'Entrar', false);
             });
         }
-
-    })
+    });
 });
