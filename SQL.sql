@@ -65,34 +65,7 @@ END $$
 
 DELIMITER ;
 
-/*
-USE fruitshop;
-# DROP PROCEDURE getAllProductsNotExpired;
-DELIMITER //
-
-CREATE PROCEDURE IF NOT EXISTS getAllProductsNotExpired(
-    IN code INT(8),
-    IN product VARCHAR(200)
-)
-BEGIN
-    SELECT
-        *
-    FROM products
-    WHERE CAST(productCode as VARCHAR(8)) LIKE '%' + code + '%'
-        AND  name LIKE '%' + product+ '%'
-        AND (DATE_FORMAT(dateExpiration, "%Y-%m-%d") >= DATE_FORMAT(NOW(), "%Y-%m-%d")
-        OR dateExpiration IS NULL)
-    ORDER BY dateRegister;
-END //
-
-DELIMITER ;
-
-# CALL getAllProductsNotExpired('9548754',	'Limão');
-
-USE fruitshop;
 # DROP PROCEDURE getAllProducts;
-DELIMITER //
-*/
 CREATE PROCEDURE IF NOT EXISTS getAllProducts()
 BEGIN
     SELECT
@@ -115,7 +88,7 @@ CREATE TABLE IF NOT EXISTS sales
 (
     saleId INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
     productId INT(10) UNSIGNED NOT NULL,
-    custormerId INT(10) UNSIGNED NOT NULL,
+    custormerId INT(10),
     quantity INT(10) UNSIGNED DEFAULT 1,
     productPrice DECIMAL(10, 2),
     dateSale DATETIME,

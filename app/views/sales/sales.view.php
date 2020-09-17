@@ -90,11 +90,21 @@
                                 <th>Remover</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+
+                        </tbody>
                     </table>
+                    <form id="frmSaleItems" method="POST" action="<?= SITE_URL; ?>/sales/finalizeSale"></form>
                 </div>
             </div>
         </div>
-
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-auto col-sm-12 col-8">
+                <button type="button" class="btn btn-warning text-uppercase cancel-sale btn-block btn-lg">Cancelar</button>
+            </div>
+            <div class="col-md-auto col-sm-12 col-8">
+                <button type="button" class="btn btn-success text-uppercase submit-sale btn-block btn-lg">Finalizar</button>
+            </div>
+        </div>
     </div>
 </div>

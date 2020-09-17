@@ -30,4 +30,10 @@ class SalesController
         });
         echo json_encode($response);
     }
+
+    public function finalizeSale()
+    {
+        echo '<pre>' . print_r($_POST, true) . '</pre>';
+        exit();
+    }
 }

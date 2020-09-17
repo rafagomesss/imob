@@ -53,7 +53,11 @@ $(document).ready(() => {
 
     $('#quantity, #productPriceOff').on('keyup change', () => {
         calculateItemAddTotal();
-    })
+    });
+
+    $('.submit-sale').on('click', () => {
+        handleSubmit();
+    });
 });
 
 $(document).on('click', '.remove-item', (event) => {
@@ -96,21 +100,45 @@ function resetStateValues() {
 function mountDataOnTable() {
     const trId = $('#tableListItems tr').length;
     let html = $('#tableListItems tbody').html();
+    let form = $('#frmSaleItems').html();
     html += `<tr id="${trId + 1}">
-                <td class='text-center'>${$('#code').val()}</td>
-                <td class='text-center'>${$('#name').val()}</td>
-                <td class='text-center'>${$('#quantity').val()}</td>
-                <td class='text-center'>${$('#productPrice').val()}</td>
-                <td class='text-center'>UN</td>
-                <td class='text-center'>${$('#productPriceOff').val()}</td>
-                <td class='text-center'>${$('#totalValue').val()}</td>
+                <td class='text-center'>
+                    ${$('#code').val()}
+                </td>
+                <td class='text-center'>
+                    ${$('#name').val()}
+                </td>
+                <td class='text-center'>
+                    ${$('#quantity').val()}
+                </td>
+                <td class='text-center'>
+                    ${$('#productPrice').val()}
+                </td>
+                <td class='text-center'>
+                UN
+                </td>
+                <td class='text-center'>
+                    ${$('#productPriceOff').val()}
+                </td>
+                <td class='text-center'>
+                    ${$('#totalValue').val()}
+                </td>
                 <td class='text-center'>
                     <a class='remove-item pointer' data-id='${trId + 1}'>
                         <i class=" far fa-trash-alt"></i>
                     </a>
                 </td>
             </tr>`;
+    form += `
+        <input type="hidden" name="code[]" value="${$('#code').val()}"/>
+        <input type="hidden" name="name[]" value="${$('#name').val()}"/>
+        <input type="hidden" name="quantity[]" value="${$('#quantity').val()}"/>
+        <input type="hidden" name="price[]" value="${$('#productPrice').val()}"/>
+        <input type="hidden" name="priceOff[]" value="${$('#productPriceOff').val()}"/>
+        <input type="hidden" name="total[]" value="${$('#totalValue').val()}"/>
+    `;
     $('#tableListItems tbody').html(html);
+    $('#frmSaleItems').html(form);
     resetStateValues();
     $('#productCode').val('');
     $('#productCode').focus();
@@ -123,4 +151,42 @@ function calculateItemAddTotal() {
     const off = $('#productPriceOff').val().length ? $('#productPriceOff').val() : 0;
     const totalValue = (quantity * productPrice) - off;
     $('#totalValue').val(totalValue === 0 ? 0 : totalValue.toFixed(2));
+}
+
+function handleSubmit() {
+    Swal.fire({
+        title: 'INFO!',
+        text: 'Deseja realmente concluir a venda?',
+        icon: 'info',
+        confirmButtonText: 'OK',
+        toast: false,
+        allowEscapeKey: false,
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            submitSale();
+            Swal.showLoading();
+        }
+    });
+    return true;
+}
+
+function submitSale() {
+    const data = $('#frmSaleItems').serializeArray();
+    console.log(data)
+    $.ajax({
+        url: '/sales/finalizeSale',
+        type: 'POST',
+        dataType: 'JSON',
+        data: data,
+    }).done(function (response) {
+        // handleDoneAlerts(response);
+        triggerAlert(response.message, 'success', 'OK');
+        window.location.href = '/sales';
+    }).fail(function (response) {
+        triggerAlert(response.responseText, 'error', 'OK');
+        return false;
+    }).always(function () {
+
+    });
 }
