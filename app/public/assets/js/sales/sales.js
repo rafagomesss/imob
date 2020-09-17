@@ -124,7 +124,7 @@ function mountDataOnTable() {
                     ${$('#totalValue').val()}
                 </td>
                 <td class='text-center'>
-                    <a class='remove-item pointer' data-id='${trId + 1}'>
+                    <a class='btn btn-danger px-4 py-1 remove-item pointer' data-id='${trId + 1}'>
                         <i class=" far fa-trash-alt"></i>
                     </a>
                 </td>
