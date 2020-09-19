@@ -1,3 +1,31 @@
+$(document).ready(() => {
+
+    if ($('input[type="email"]').length) {
+        $('input[type="email"]').change((event) => {
+            $(event.target).closest('form').submit(() => { return false; });
+            var sEmail = $(event.target).val();
+            var emailFilter = /^.+@.+\..{2,}$/;
+            var illegalChars = /[\(\)\<\>\,\;\:\\\/\"\[\]]/
+            if (!(emailFilter.test(sEmail)) || sEmail.match(illegalChars)) {
+                Swal.fire({
+                    title: 'ATENÇÃO!',
+                    text: 'Por favor, informe um email válido!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                    toast: false,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(event.target).val('');
+                        $(event.target).focus();
+                    }
+                });
+            }
+        });
+    }
+});
+
 function triggerAlert(msg = '', icon = 'success', confirmButtonText = 'OK', toast = false, time = 3000, callback = null) {
     const titleContent = {
         'error': 'Erro!',

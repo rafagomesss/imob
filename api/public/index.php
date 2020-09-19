@@ -19,6 +19,7 @@ try {
     $app->post('/product/update', 'Api\Controller\Product:update');
     $app->post('/product/getProductByNameCode', 'Api\Controller\Product:getByCodeName');
 
+    $app->post('/customer/register', 'Api\Controller\Customer:customerRegister');
     $app->get('/customer/customers', 'Api\Controller\Customer:getAllCustomers');
     $app->post('/customer/delete', 'Api\Controller\Customer:delete');
     $app->post('/customer/edit', 'Api\Controller\Customer:getCustomer');

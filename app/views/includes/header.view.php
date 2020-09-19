@@ -18,6 +18,12 @@
             <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/jquery/jquery-ui.theme.min.css">
         <?php endif; ?>
     <?php endif; ?>
+    <?php if ($this->controller === 'customers') : ?>
+        <?php if ($this->action === 'register' || $this->action === 'edit') : ?>
+            <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/jquery/jquery-ui.min.css">
+            <link rel="stylesheet" type="text/css" href="<?= CSS_PATH; ?>/jquery/jquery-ui.theme.min.css">
+        <?php endif; ?>
+    <?php endif; ?>
     <link rel="icon" href="<?= ASSETS_PATH; ?>/img/favicon.ico">
 </head>
 

@@ -17,14 +17,14 @@ use System\Common; ?>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-12">
-                        <form id="form<?= $this->action === 'edit' ? 'Update' : 'Register'; ?>Customers" method="POST">
+                        <form id="form<?= $this->action === 'edit' ? 'Update' : 'Register'; ?>Customer" method="POST">
                             <?php if ($this->action === 'edit') : ?>
                                 <input type="hidden" id="customerId" name="customerId" value="<?= Common::encryptDecryptData($this->customer['id']); ?>">
                             <?php endif; ?>
                             <div class="row justify-content-center mb-2">
                                 <div class="col-md-8">
                                     <label for="customerName">Nome</label>
-                                    <input type="text" class="form-control" name="customerName" id="customerName" placeholder="Ex.: Fulano da Silva" value="<?= $this->customer['name'] ?? null; ?>" />
+                                    <input type="text" class="form-control" name="customerName" id="customerName" placeholder="Ex.: Fulano da Silva" value="<?= $this->customer['name'] ?? null; ?>" required />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="customerCpf">CPF</label>
@@ -38,7 +38,7 @@ use System\Common; ?>
                                 </div>
                                 <div class="col-md-10">
                                     <label for="customerEmail">E-mail</label>
-                                    <input type="text" class="form-control" name="customerEmail" id="customerEmail" value="<?= $this->customer['email'] ?? null; ?>" />
+                                    <input type="email" class="form-control" name="customerEmail" id="customerEmail" value="<?= $this->customer['email'] ?? null; ?>" />
                                 </div>
                             </div>
                             <div class="row justify-content-center mb-4">
@@ -68,7 +68,7 @@ use System\Common; ?>
                             <div class="row justify-content-center mb-4">
                                 <div class="col-md-5">
                                     <label for="customerCellphone">Celular</label>
-                                    <input type="text" class="form-control" name="customerCellphone" id="customerCellphone" value="<?= $this->customer['cellphone'] ?? null ?>" />
+                                    <input type="text" class="form-control" name="customerCellphone" id="customerCellphone" value="<?= $this->customer['cellphone'] ?? null ?>" required />
                                 </div>
                                 <div class="col-md-2">
                                     <label for="customerGender">Gênero</label>

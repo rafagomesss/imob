@@ -6,6 +6,7 @@ namespace Imob\Controller;
 
 use Imob\Model\ModelCustomer;
 use Imob\View\View;
+use System\Common;
 use System\Flash;
 
 class CustomersController
@@ -57,5 +58,12 @@ class CustomersController
             exit();
         }
         echo json_encode($this->model->deleteCustomer(['id' => $id]));
+    }
+
+    public function registerCustomer()
+    {
+        $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $formData['customerDateBirth'] = Common::convertDateToDataBase($formData['customerDateBirth']);
+        echo json_encode($this->model->registerCustomer($formData));
     }
 }
