@@ -41,32 +41,47 @@ use System\Common; ?>
                                     <input type="email" class="form-control" name="customerEmail" id="customerEmail" value="<?= $this->customer['email'] ?? null; ?>" />
                                 </div>
                             </div>
-                            <div class="row justify-content-center mb-4">
+                            <div class="row justify-content-center mb-2">
                                 <div class="col-md-3">
                                     <label for="customerCep">CEP</label>
                                     <input type="text" class="form-control" name="customerCep" id="customerCep" value="<?= $this->customer['zipCode'] ?? null; ?>" />
                                 </div>
                                 <div class="col-md-2">
                                     <label for="customerUf">UF</label>
-                                    <input type="text" class="form-control" name="customerUf" id="customerUf" value="<?= $this->customer['state'] ?? null; ?>" />
+                                    <select class="form-control uf" name="customerUf" id="customerUf">
+                                        <option></option>
+                                        <?php if (is_array($this->states) && count($this->states)) : ?>
+                                            <?php foreach ($this->states as $state) : ?>
+                                                <option value="<?= $state['sigla']; ?>"><?= $state['nome']; ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
                                 </div>
                                 <div class="col-md-7">
                                     <label for="customerCity">Cidade</label>
-                                    <input type="text" class="form-control" name="customerCity" id="customerCity" value="<?= $this->customer['city'] ?? null; ?>" />
+                                    <input type="text" class="form-control city" name="customerCity" id="customerCity" value="<?= $this->customer['city'] ?? null; ?>" />
                                 </div>
                             </div>
-                            <div class="row justify-content-center mb-4">
+                            <div class="row justify-content-center mb-2">
                                 <div class="col-md-6">
                                     <label for="customerAddress">Endereço</label>
                                     <input type="text" class="form-control" name="customerAddress" id="customerAddress" value="<?= $this->customer['address'] ?? null ?>" />
                                 </div>
+                                <div class="col-md-2">
+                                    <label for="customerNumberAddress">Número</label>
+                                    <input type="text" class="form-control" name="customerNumberAddress" id="customerNumberAddress" value="<?= $this->customer['complement'] ?? null ?>" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="customerNeighborhood">Bairro</label>
+                                    <input type="text" class="form-control" name="customerNeighborhood" id="customerNeighborhood" value="<?= $this->customer['complement'] ?? null ?>" />
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mb-2">
                                 <div class="col-md-6">
                                     <label for="customerComplement">Complemento</label>
                                     <input type="text" class="form-control" name="customerComplement" id="customerComplement" value="<?= $this->customer['complement'] ?? null ?>" />
                                 </div>
-                            </div>
-                            <div class="row justify-content-center mb-4">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <label for="customerCellphone">Celular</label>
                                     <input type="text" class="form-control" name="customerCellphone" id="customerCellphone" value="<?= $this->customer['cellphone'] ?? null ?>" required />
                                 </div>
@@ -74,7 +89,9 @@ use System\Common; ?>
                                     <label for="customerGender">Gênero</label>
                                     <input type="text" class="form-control" name="customerGender" id="customerGender" value="<?= $this->customer['gender'] ?? null ?>" />
                                 </div>
-                                <div class="col-md-5">
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-auto">
                                     <label for="customerContact">Contato</label>
                                     <input type="text" class="form-control" name="customerContact" id="customerContact" value="<?= $this->customer['contact'] ?? null ?>" />
                                 </div>

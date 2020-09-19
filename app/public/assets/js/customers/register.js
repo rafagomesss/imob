@@ -7,12 +7,14 @@ $(document).ready(() => {
         dateFormat: "dd/mm/yy",
     });
     $('#customerDateBirth').datepicker($.datepicker.regional["pt-BR"]);
+
     $('#customerCpf').mask('000.000.000-00');
     $('#customerEmail').mask("A", {
         translation: {
             "A": { pattern: /[\w@\-.+]/, recursive: true }
         }
     });
+    $('#customerCep').mask('00000-000');
 
     $('#btnRegisterUpdateProduct').on('click', () => {
         const inputs = $(':input[required]:visible');
@@ -32,6 +34,23 @@ $(document).ready(() => {
 
             });
         }
+    });
+
+    $('#customerCep').on('change focusout', (event) => {
+        const cep = $(event.target).val().length ? $(event.target).val().replace(/[^0-9]/g, '') : null;
+        $.ajax({
+            url: '/customers/zipConsult',
+            type: 'POST',
+            dataType: 'JSON',
+            data: { cep },
+        }).done(function (response) {
+            handleDoneZipCodeSearch(response);
+        }).fail(function (response) {
+            triggerAlert(response.responseText, 'error', 'OK');
+            return false;
+        }).always(function () {
+
+        });
     });
 });
 
@@ -60,4 +79,23 @@ function handleDoneAlerts(response) {
         return true;
     }
 }
+
+function handleDoneZipCodeSearch(response) {
+    if (response.erro) {
+        triggerAlert('CEP Inválido!', 'warning');
+        return false;
+    } else if (response.error) {
+        triggerAlert('CEP Inexistente!', 'warning');
+        return false;
+    }
+    completeAddress(response);
+}
+
+function completeAddress(response) {
+    $('.uf').val(response.uf);
+    $('.city').val(response.localidade);
+    $('#customerAddress').val(response.logradouro);
+}
+
+
 

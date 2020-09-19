@@ -33,6 +33,7 @@ class CustomersController
         $view->controller = 'customers';
         $view->action = 'register';
         $view->customer = [];
+        $view->states = $this->listStates();
         return $view->render();
     }
 
@@ -42,6 +43,7 @@ class CustomersController
         $view->controller = 'customers';
         $view->action = 'edit';
         $view->customer = $this->model->editCustomer(['id' => $data[0]]);
+        $view->states = $this->listStates();
         if (!empty($view->customer['error'])) {
             Flash::set('danger', $view->customer['message']);
             header('Location: /customers/list');
@@ -65,5 +67,16 @@ class CustomersController
         $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $formData['customerDateBirth'] = Common::convertDateToDataBase($formData['customerDateBirth']);
         echo json_encode($this->model->registerCustomer($formData));
+    }
+
+    public function zipConsult(): void
+    {
+        $cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_NUMBER_INT);
+        echo json_encode(Common::consultZip($cep));
+    }
+
+    public function listStates()
+    {
+        return Common::listStates();
     }
 }

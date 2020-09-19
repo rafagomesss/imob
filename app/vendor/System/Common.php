@@ -39,4 +39,16 @@ class Common
             return base64_encode($data . '%$#@!');
         }
     }
+
+    public static function consultZip(string $cep): array
+    {
+        $return = RequestAPI::sendRequest('viacep.com.br/ws/' . $cep . '/json/');
+        return $return;
+    }
+
+    public static function listStates()
+    {
+        $return = RequestAPI::sendRequest('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+        return $return;
+    }
 }
