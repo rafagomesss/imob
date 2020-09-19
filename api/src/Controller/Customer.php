@@ -21,6 +21,8 @@ class Customer
             'customerUf' => 'state',
             'customerCity' => 'city',
             'customerAddress' => 'address',
+            'customerNumberAddress' => 'number',
+            'customerNeighborhood' => 'neighborhood',
             'customerComplement' => 'complement',
             'customerCellphone' => 'cellphone',
             'customerGender' => 'gender',
@@ -98,13 +100,10 @@ class Customer
             $conn = Connection::getInstance();
             $data = $this->handleDataCustomer($request->getParsedBody());
             $stmt = $conn->prepare(
-                'INSERT INTO customers ( name, cpf, dateBirth, email, zipCode, state, city, address, complement,
-                    cellphone,
-                    gender,
-                    contact
-                ) VALUES (:name, :cpf, :dateBirth, :email, :zipCode, :state, :city, :address, :complement, :cellphone,
-                    :gender,
-                    :contact
+                'INSERT INTO customers ( name, cpf, dateBirth, email, zipCode, state, city, address, number,
+                    neighborhood, complement, cellphone, gender, contact
+                ) VALUES (:name, :cpf, :dateBirth, :email, :zipCode, :state, :city, :address, :number, :neighborhood,
+                    :complement, :cellphone, :gender, :contact
                 )'
             );
             $stmt->execute($data);

@@ -20,6 +20,11 @@ $(document).ready(() => {
         const inputs = $(':input[required]:visible');
         if (formFieldValidate(inputs)) {
             const data = $('#formRegisterCustomer').serializeArray();
+            data.forEach(function (item) {
+                if (item.name === 'customerCpf' || item.name === 'customerCep') {
+                    item.value = item.value.replace(/[^0-9]/g, '');
+                }
+            });
             $.ajax({
                 url: '/customers/registerCustomer',
                 type: 'POST',
@@ -95,6 +100,7 @@ function completeAddress(response) {
     $('.uf').val(response.uf);
     $('.city').val(response.localidade);
     $('#customerAddress').val(response.logradouro);
+    $('#customerNeighborhood').val(response.bairro);
 }
 
 

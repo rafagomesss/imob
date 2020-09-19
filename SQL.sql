@@ -115,6 +115,8 @@ CREATE TABLE IF NOT EXISTS customers
     state CHAR(2),
     city  VARCHAR(200),
     address VARCHAR(200),
+    number VARCHAR(20),
+    neighborhood VARCHAR(50),
     complement VARCHAR(200),
     cellphone VARCHAR(16) NOT NULL,
     contact VARCHAR(16),

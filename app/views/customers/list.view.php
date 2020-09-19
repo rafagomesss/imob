@@ -25,7 +25,8 @@ use System\Common; ?>
                             <th>Cidade</th>
                             <th>CEP</th>
                             <th>Endereço</th>
-                            <th>Complemento</th>
+                            <th>Número</th>
+                            <th>Bairro</th>
                             <th colspan="2">Ações</th>
                         </tr>
                     </thead>
@@ -38,9 +39,10 @@ use System\Common; ?>
                                     <td class="align-middle"><?= $customer['email'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['cellphone'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['city'] ?? '-'; ?> </td>
-                                    <td class="align-middle"><?= $customer['zipcode'] ?? '-'; ?> </td>
+                                    <td class="align-middle"><?= $customer['zipCode'] ?? '-'; ?> </td>
                                     <td class="align-middle"><?= $customer['address'] ?? '-'; ?> </td>
-                                    <td class="align-middle"><?= $customer['complement'] ?? '-'; ?> </td>
+                                    <td class="align-middle"><?= $customer['number'] ?? '-'; ?> </td>
+                                    <td class="align-middle"><?= $customer['neighborhood'] ?? '-'; ?> </td>
                                     <td class="align-middle text-center">
                                         <a class="btn btn-sm btn-success mr-sm-0 px-2 edit-customer" href="<?= SITE_URL; ?>/customers/edit/<?= $customer['id']; ?>">
                                             <i class="far fa-edit"></i> Editar
