@@ -25,4 +25,23 @@ class Customer
         $response->getBody()->write(json_encode($retorno));
         return $response;
     }
+
+    public function delete(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $id = $request->getParsedBody()['id'];
+            $stmt = $conn->prepare('DELETE FROM customers WHERE id = :id');
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $retorno = ['error' => true, 'message' => 'Cliente não existe!'];
+            if ($stmt->rowCount() > 0) {
+                $retorno = ['message' => 'Cliente excluído com sucesso!'];
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
 }

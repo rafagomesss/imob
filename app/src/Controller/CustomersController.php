@@ -33,4 +33,14 @@ class CustomersController
         $view->customer = [];
         return $view->render();
     }
+
+    public function delete()
+    {
+        $id = filter_input(INPUT_POST, 'customerId', FILTER_VALIDATE_INT) ?? null;
+        if (empty($id) || !is_numeric($id)) {
+            echo json_encode(['error' => true, 'message' => 'Identificação do cliente não encontrada!']);
+            exit();
+        }
+        echo json_encode($this->model->deleteCustomer(['id' => $id]));
+    }
 }

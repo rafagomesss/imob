@@ -1,9 +1,9 @@
 $(document).ready(() => {
-    $('.delete-product').on('click', (event) => {
-        const productId = $(event.target).data('id');
+    $('.delete-customer').on('click', (event) => {
+        const customerId = $(event.target).data('id');
         Swal.fire({
             title: 'Atenção!',
-            html: '<p>Deseja realmente cancelar o produto: <b>"' + $(event.target).data('name') + '"</b>?</p>',
+            html: '<p>Deseja realmente cancelar o cliente: <b>"' + $(event.target).data('name') + '"</b>?</p>',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -16,10 +16,10 @@ $(document).ready(() => {
             if (result.isConfirmed) {
                 Swal.showLoading();
                 $.ajax({
-                    url: '/products/delete/',
+                    url: '/customers/delete/',
                     type: 'POST',
                     dataType: 'JSON',
-                    data: { productId },
+                    data: { customerId },
                 }).done((response) => {
                     handleDoneAlerts(response);
                 }).fail((response) => {
@@ -47,7 +47,7 @@ function handleDoneAlerts(response) {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.showLoading();
-                window.location.href = '/products/list';
+                window.location.href = '/customers/list';
             }
         });
         return true;

@@ -20,6 +20,7 @@ try {
     $app->post('/product/getProductByNameCode', 'Api\Controller\Product:getByCodeName');
 
     $app->get('/customer/customers', 'Api\Controller\Customer:getAllCustomers');
+    $app->post('/customer/delete', 'Api\Controller\Customer:delete');
 
     $app->run();
 } catch (\Throwable $t) {
