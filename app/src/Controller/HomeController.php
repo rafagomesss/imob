@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Imob\Controller;
 
 use Imob\View\View;
-use System\Common;
-use System\Session;
 
 class HomeController
 {

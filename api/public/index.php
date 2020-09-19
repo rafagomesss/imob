@@ -19,6 +19,7 @@ try {
     $app->post('/product/update', 'Api\Controller\Product:update');
     $app->post('/product/getProductByNameCode', 'Api\Controller\Product:getByCodeName');
 
+    $app->get('/customer/customers', 'Api\Controller\Customer:getAllCustomers');
 
     $app->run();
 } catch (\Throwable $t) {

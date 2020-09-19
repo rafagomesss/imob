@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Imob\Controller;
 
-use Exception;
 use Imob\View\View;
 use System\Flash;
 use System\PasswordManager;

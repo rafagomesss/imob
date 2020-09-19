@@ -13,10 +13,12 @@ use System\RequestAPI;
 class ProductsController
 {
     private $model;
+
     public function __construct()
     {
         $this->model = new ModelProduct();
     }
+
     public function list()
     {
         $view = new View('products/list', true);

@@ -52,7 +52,7 @@ END //
 
 DELIMITER ;
 
-  CALL getAllProductsNotExpired(null, 'A');
+# CALL getAllProductsNotExpired(null, 'A');
 
 DELIMITER $$
 
@@ -109,15 +109,23 @@ CREATE TABLE IF NOT EXISTS customers
 (
     id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL,
     name VARCHAR(200) NOT NULL,
-    cpf INT(11) UNSIGNED UNIQUE NOT NULL,
+    cpf BIGINT(11) ZEROFILL UNSIGNED UNIQUE  NOT NULL,
+    email VARCHAR(200),
+    zipCode INT(8),
+    state CHAR(2),
+    city  VARCHAR(200),
     address VARCHAR(200),
     complement VARCHAR(200),
     cellphone VARCHAR(16) NOT NULL,
     contact VARCHAR(16),
     gender CHAR(1),
-    dateBirth DATETIME
+    dateBirth DATETIME,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET utf8;
+# TRUNCATE TABLE customers;
+
+INSERT INTO customers VALUES (0, 'Fulano Cliente', 09854875395, 'fulano@email.com', 87020000, 'PR', 'Maringá', 'R. Central', '', '(44) 9 9876-0989', '', 'M', DATE('1956-08-21'));
+
 # SELECT * FROM customers;
 
 #####################################################################
