@@ -21,6 +21,7 @@ try {
 
     $app->get('/customer/customers', 'Api\Controller\Customer:getAllCustomers');
     $app->post('/customer/delete', 'Api\Controller\Customer:delete');
+    $app->post('/customer/edit', 'Api\Controller\Customer:getCustomer');
 
     $app->run();
 } catch (\Throwable $t) {

@@ -25,7 +25,6 @@ use System\Common; ?>
                                 <div class="col-md-3">
                                     <label for="productCode">Código Produto</label>
                                     <input type="text" class="form-control" name="productCode" id="productCode" aria-describedby="productCodeHelp" placeholder="xxxxxxxx" value="<?= $this->product['productCode'] ?? null; ?>" maxlength="8" />
-                                    <small id="productCodeHelp" class="form-text text-muted">Código de cadastro do produto</small>
                                 </div>
                                 <div class="col-md-9">
                                     <label for="productName">Nome do Produto</label>

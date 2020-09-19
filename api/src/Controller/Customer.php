@@ -44,4 +44,25 @@ class Customer
         $response->getBody()->write(json_encode($retorno));
         return $response;
     }
+
+    public function getCustomer(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $id = $request->getParsedBody()['id'];
+            $stmt = $conn->prepare('SELECT * FROM customers WHERE id = :id');
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $retorno = ['error' => true, 'message' => 'Cliente não encontrado!'];
+            if ($stmt->rowCount() > 0) {
+                $retorno = $stmt->fetch();
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        } catch (\Throwable $t) {
+            $retorno = ['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
 }

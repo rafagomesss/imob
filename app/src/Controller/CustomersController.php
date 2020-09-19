@@ -6,6 +6,7 @@ namespace Imob\Controller;
 
 use Imob\Model\ModelCustomer;
 use Imob\View\View;
+use System\Flash;
 
 class CustomersController
 {
@@ -31,6 +32,20 @@ class CustomersController
         $view->controller = 'customers';
         $view->action = 'register';
         $view->customer = [];
+        return $view->render();
+    }
+
+    public function edit(array $data)
+    {
+        $view = new View('customers/register', true);
+        $view->controller = 'customers';
+        $view->action = 'edit';
+        $view->customer = $this->model->editCustomer(['id' => $data[0]]);
+        if (!empty($view->customer['error'])) {
+            Flash::set('danger', $view->customer['message']);
+            header('Location: /customers/list');
+            exit();
+        }
         return $view->render();
     }
 
