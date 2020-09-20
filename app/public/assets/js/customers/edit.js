@@ -43,20 +43,22 @@ $(document).ready(() => {
     });
 
     $('#customerCep').on('change focusout', (event) => {
-        const cep = $(event.target).val().length ? $(event.target).val().replace(/[^0-9]/g, '') : null;
-        $.ajax({
-            url: '/customers/zipConsult',
-            type: 'POST',
-            dataType: 'JSON',
-            data: { cep },
-        }).done(function (response) {
-            handleDoneZipCodeSearch(response);
-        }).fail(function (response) {
-            triggerAlert(response.responseText, 'error', 'OK');
-            return false;
-        }).always(function () {
+        if ($(event.target).val().length) {
+            const cep = $(event.target).val().length ? $(event.target).val().replace(/[^0-9]/g, '') : null;
+            $.ajax({
+                url: '/customers/zipConsult',
+                type: 'POST',
+                dataType: 'JSON',
+                data: { cep },
+            }).done(function (response) {
+                handleDoneZipCodeSearch(response);
+            }).fail(function (response) {
+                triggerAlert(response.responseText, 'error', 'OK');
+                return false;
+            }).always(function () {
 
-        });
+            });
+        }
     });
 });
 

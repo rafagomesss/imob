@@ -52,7 +52,7 @@ use System\Common; ?>
                                         <option></option>
                                         <?php if (is_array($this->states) && count($this->states)) : ?>
                                             <?php foreach ($this->states as $state) : ?>
-                                                <option value="<?= $state['sigla']; ?>" <?= $state['sigla'] === $this->customer['state'] ? 'selected' : ''; ?>><?= $state['nome']; ?></option>
+                                                <option value="<?= $state['sigla']; ?>" <?= !empty($this->customer['state']) && $state['sigla'] === $this->customer['state'] ? 'selected' : ''; ?>><?= $state['nome']; ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
