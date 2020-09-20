@@ -67,4 +67,15 @@ class Common
 
         return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cpfCnpj);
     }
+
+    public static function mask(string $string, string $mask = '#####-###'): string
+    {
+        $str = str_replace(" ", "", $string);
+
+        for ($i = 0; $i < strlen($str); $i++) {
+            $mask[strpos($mask, "#")] = $str[$i];
+        }
+
+        return $mask;
+    }
 }

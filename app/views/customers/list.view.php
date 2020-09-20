@@ -14,7 +14,7 @@ use System\Common; ?>
             </div>
         </div>
         <div class="row justify-content-center mt-3">
-            <div class="col-12 col-xl-12 col-md-12 table-responsive-sm table-responsive-md">
+            <div class="col-12 col-xl-12 col-md-12 table-responsive table-responsive-sm table-responsive-md table-responsive-xs">
                 <table class="table table-striped table-inverse">
                     <thead class="thead-inverse">
                         <tr class="text-dark text-center text-uppercase">
@@ -39,18 +39,19 @@ use System\Common; ?>
                                     <td class="align-middle"><?= $customer['email'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['cellphone'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['city'] ?? '-'; ?> </td>
-                                    <td class="align-middle"><?= $customer['zipCode'] ?? '-'; ?> </td>
+                                    <td class="align-middle cep"><?= Common::mask($customer['zipCode']) ?? '-'; ?> </td>
                                     <td class="align-middle"><?= $customer['address'] ?? '-'; ?> </td>
                                     <td class="align-middle"><?= $customer['number'] ?? '-'; ?> </td>
                                     <td class="align-middle"><?= $customer['neighborhood'] ?? '-'; ?> </td>
                                     <td class="align-middle text-center">
-                                        <a class="btn btn-sm btn-success mr-sm-0 px-2 edit-customer" href="<?= SITE_URL; ?>/customers/edit/<?= $customer['id']; ?>">
+                                        <a class="btn btn-sm btn-success px-2 edit-customer" href="<?= SITE_URL; ?>/customers/edit/<?= $customer['id']; ?>">
                                             <i class="far fa-edit"></i> Editar
                                         </a>
-                                        <a class="btn btn-sm btn-danger delete-customer" data-id="<?= $customer['id']; ?>" data-name="<?= $customer['name']; ?>" data-cpf="<?= $customer['cpf']; ?>">
+                                        <a class="btn btn-sm btn-danger px-2 delete-customer" data-id="<?= $customer['id']; ?>" data-name="<?= $customer['name']; ?>" data-cpf="<?= $customer['cpf']; ?>">
                                             <i class="far fa-trash-alt"></i> Excluir
                                         </a>
                                     </td>
+                                    <td></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else : ?>
