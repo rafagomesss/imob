@@ -20,14 +20,14 @@ $(document).ready(() => {
     $('#btnRegisterUpdateProduct').on('click', () => {
         const inputs = $(':input[required]:visible');
         if (formFieldValidate(inputs)) {
-            const data = $('#formRegisterCustomer').serializeArray();
+            const data = $('#formUpdateCustomer').serializeArray();
             data.forEach(function (item) {
                 if (item.name === 'customerCpf' || item.name === 'customerCep') {
                     item.value = item.value.replace(/[^0-9]/g, '');
                 }
             });
             $.ajax({
-                url: '/customers/registerCustomer',
+                url: '/customers/updateCustomer',
                 type: 'POST',
                 dataType: 'JSON',
                 data: data,

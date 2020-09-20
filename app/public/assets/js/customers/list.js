@@ -3,7 +3,7 @@ $(document).ready(() => {
         const customerId = $(event.target).data('id');
         Swal.fire({
             title: 'Atenção!',
-            html: '<p>Deseja realmente cancelar o cliente: <b>"' + $(event.target).data('name') + '"</b>?</p>',
+            html: `<p>Deseja realmente cancelar o cliente: <br/><b>${$(event.target).data('name')} - CPF: ${$(event.target).data('cpf')}</b>?</p>`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',

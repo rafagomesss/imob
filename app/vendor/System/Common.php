@@ -51,4 +51,20 @@ class Common
         $return = RequestAPI::sendRequest('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
         return $return;
     }
+
+    public static function formatCnpjCpf($value)
+    {
+        if (empty($value)) {
+            return '';
+        }
+
+        $cpfLength = 11;
+        $cpfCnpj = preg_replace("/\D/", '', $value);
+
+        if (strlen($cpfCnpj) === $cpfLength) {
+            return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cpfCnpj);
+        }
+
+        return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cpfCnpj);
+    }
 }

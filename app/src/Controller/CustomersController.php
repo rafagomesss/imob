@@ -69,6 +69,14 @@ class CustomersController
         echo json_encode($this->model->registerCustomer($formData));
     }
 
+    public function updateCustomer()
+    {
+        $formData = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $formData['customerId'] = Common::encryptDecryptData($formData['customerId'], true);
+        $formData['customerDateBirth'] = Common::convertDateToDataBase($formData['customerDateBirth']);
+        echo json_encode($this->model->updateCustomer($formData));
+    }
+
     public function zipConsult(): void
     {
         $cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_NUMBER_INT);

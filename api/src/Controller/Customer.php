@@ -94,6 +94,43 @@ class Customer
         return $response;
     }
 
+    public function update(Request $request, Response $response, $args)
+    {
+        try {
+            $conn = Connection::getInstance();
+            $data = $this->handleDataCustomer($request->getParsedBody(), 'update');
+            $stmt = $conn->prepare(
+                'UPDATE customers
+                    SET name = :name,
+                        cpf = :cpf,
+                        dateBirth = :dateBirth,
+                        email = :email,
+                        zipCode = :zipCode,
+                        state = :state,
+                        city = :city,
+                        address = :address,
+                        number = :number,
+                        neighborhood = :neighborhood,
+                        complement = :complement,
+                        cellphone = :cellphone,
+                        gender = :gender,
+                        contact = :contact
+                WHERE id = :id'
+            );
+            $stmt->execute($data);
+            $retorno = ['error' => true, 'message' => 'Cliente não encontrado!'];
+            if ($stmt->execute($data) || $stmt->rowCount() > 0) {
+                $retorno = ['message' => 'Cliente atualizado com sucesso!'];
+            }
+        } catch (\PDOException $pEx) {
+            $retorno = ['error' => true, 'code' => $pEx->getCode(), 'message' => $pEx->getMessage(), 'line' => $pEx->getLine(), 'file' => $pEx->getFile()];
+        } catch (\Throwable $t) {
+            $retorno = ['error' => true, 'code' => $t->getCode(), 'message' => $t->getMessage(), 'line' => $t->getLine(), 'file' => $t->getFile()];
+        }
+        $response->getBody()->write(json_encode($retorno));
+        return $response;
+    }
+
     public function customerRegister(Request $request, Response $response, $args)
     {
         try {

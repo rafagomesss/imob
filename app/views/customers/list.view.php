@@ -34,8 +34,8 @@ use System\Common; ?>
                         <?php if (!empty($this->customers[0]['id']) && is_array($this->customers) && count($this->customers)) : ?>
                             <?php foreach ($this->customers as $customer) : ?>
                                 <tr class="text-center">
-                                    <td class="align-middle" scope="row"><?= $customer['name'] ?? '-'; ?></td>
-                                    <td class="align-middle"><?= $customer['cpf']; ?></td>
+                                    <td class="align-middle" scope="row"><?= $customer['name']; ?></td>
+                                    <td class="align-middle"><?= Common::formatCnpjCpf($customer['cpf']); ?></td>
                                     <td class="align-middle"><?= $customer['email'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['cellphone'] ?? '-'; ?></td>
                                     <td class="align-middle"><?= $customer['city'] ?? '-'; ?> </td>
@@ -47,7 +47,7 @@ use System\Common; ?>
                                         <a class="btn btn-sm btn-success mr-sm-0 px-2 edit-customer" href="<?= SITE_URL; ?>/customers/edit/<?= $customer['id']; ?>">
                                             <i class="far fa-edit"></i> Editar
                                         </a>
-                                        <a class="btn btn-sm btn-danger delete-customer" data-id="<?= $customer['id']; ?>" data-name="<?= $customer['name']; ?>">
+                                        <a class="btn btn-sm btn-danger delete-customer" data-id="<?= $customer['id']; ?>" data-name="<?= $customer['name']; ?>" data-cpf="<?= $customer['cpf']; ?>">
                                             <i class="far fa-trash-alt"></i> Excluir
                                         </a>
                                     </td>

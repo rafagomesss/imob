@@ -34,7 +34,7 @@ use System\Common; ?>
                             <div class="row justify-content-center mb-2">
                                 <div class="col-md-2">
                                     <label for="customerDateBirth">Nascimento</label>
-                                    <input type="text" class="form-control" name="customerDateBirth" id="customerDateBirth" value="<?= $this->customer['dateBirth'] ?? null; ?>" />
+                                    <input type="text" class="form-control" name="customerDateBirth" id="customerDateBirth" value="<?= Common::convertDateDataBaseToBr($this->customer['dateBirth']) ?? null; ?>" />
                                 </div>
                                 <div class="col-md-10">
                                     <label for="customerEmail">E-mail</label>
@@ -52,7 +52,7 @@ use System\Common; ?>
                                         <option></option>
                                         <?php if (is_array($this->states) && count($this->states)) : ?>
                                             <?php foreach ($this->states as $state) : ?>
-                                                <option value="<?= $state['sigla']; ?>"><?= $state['nome']; ?></option>
+                                                <option value="<?= $state['sigla']; ?>" <?= $state['sigla'] === $this->customer['state'] ? 'selected' : ''; ?>><?= $state['nome']; ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
@@ -69,11 +69,11 @@ use System\Common; ?>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="customerNumberAddress">Número</label>
-                                    <input type="text" class="form-control" name="customerNumberAddress" id="customerNumberAddress" value="<?= $this->customer['complement'] ?? null ?>" />
+                                    <input type="text" class="form-control" name="customerNumberAddress" id="customerNumberAddress" value="<?= $this->customer['number'] ?? null ?>" />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="customerNeighborhood">Bairro</label>
-                                    <input type="text" class="form-control" name="customerNeighborhood" id="customerNeighborhood" value="<?= $this->customer['complement'] ?? null ?>" />
+                                    <input type="text" class="form-control" name="customerNeighborhood" id="customerNeighborhood" value="<?= $this->customer['neighborhood'] ?? null ?>" />
                                 </div>
                             </div>
                             <div class="row justify-content-center mb-2">

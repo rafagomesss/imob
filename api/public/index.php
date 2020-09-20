@@ -22,6 +22,7 @@ try {
     $app->post('/customer/register', 'Api\Controller\Customer:customerRegister');
     $app->get('/customer/customers', 'Api\Controller\Customer:getAllCustomers');
     $app->post('/customer/delete', 'Api\Controller\Customer:delete');
+    $app->post('/customer/update', 'Api\Controller\Customer:update');
     $app->post('/customer/edit', 'Api\Controller\Customer:getCustomer');
 
     $app->run();
